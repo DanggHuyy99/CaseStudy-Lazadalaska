@@ -3,6 +3,8 @@ package dao;
 import dto.PageAble;
 import model.Category;
 import model.Product;
+import model.Role;
+import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,11 +19,15 @@ public class ProductDAO extends DatabaseConnection {
     private final String TOTAL_PRODUCT = "SELECT count(1) as `total` FROM lazadalaska.product p left join category c on p.category_id = c.id where  lower(p.name) like ?" +
             " or lower(p.describe) like ? or lower(c.name) like ?";
 
+    private final String SELECT_PRODUCT_BY_ID = "SELECT p.*, c.name as `category_name` FROM lazadalaska.product p left join category c on p.category_id = c.id where p.id = ?";
+
     private final String CREATE_PRODUCT = "INSERT INTO `lazadalaska`.`product` (`name`, `price`, `describe`, `quantity`, `img`, `category_id`) VALUES (?, ?, ?, ?, ?, ?)";
 
     private final String UPDATE_PRODUCT = "UPDATE `lazadalaska`.`product` SET `name` = ?, `price` = ?, `describe` = ?, `quantity` = ?, `img` = ?, `category_id` = ? WHERE (`id` = ?)";
 
     private final String DELETE_PRODUCT = "DELETE FROM `lazadalaska`.`product` WHERE (`id` = ?)";
+
+    private final String SELECT_BY_USERNAME = "SELECT * FROM user where username = ?";
 
     public List<Product> findAll(PageAble pageAble) {
         String search = pageAble.getSearch();
@@ -65,5 +71,112 @@ public class ProductDAO extends DatabaseConnection {
         return products;
     }
 
+    public Product findById(int id) {
+        try {
+            Connection connection = getConnection();
 
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idProduct = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String describe = resultSet.getString("describe");
+                int quantity = resultSet.getInt("quantity");
+                String img = resultSet.getString("img");
+                int category_id = resultSet.getInt("category_id");
+                String category_name = resultSet.getString("category_name");
+                return new Product(idProduct, name, price, describe, quantity, img, new Category(category_id, category_name));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public void creatProduct(Product product) {
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_PRODUCT);
+
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setString(3, product.getDescribe());
+            preparedStatement.setInt(4, product.getQuantity());
+            preparedStatement.setString(5, product.getImg());
+            preparedStatement.setInt(6, product.getCategory().getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateProduct(Product product){
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT);
+
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setString(3, product.getDescribe());
+            preparedStatement.setInt(4, product.getQuantity());
+            preparedStatement.setString(5, product.getImg());
+            preparedStatement.setInt(6, product.getCategory().getId());
+            preparedStatement.setInt(7, product.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteProduct(int id){
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PRODUCT);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User findByUsername(String username) {
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_USERNAME);
+
+            preparedStatement.setString(1, username);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+
+                String name = rs.getString("username");
+
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String fullname = rs.getString("fullname");
+                String phone = String.valueOf(Integer.parseInt(rs.getString("phone")));
+                Role role = Role.valueOf(rs.getString("role"));
+                return new User(id, name,password, email, fullname, phone, role);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }
