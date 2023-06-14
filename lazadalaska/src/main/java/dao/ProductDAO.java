@@ -37,7 +37,9 @@ public class ProductDAO extends DatabaseConnection {
         try {
             Connection connection = getConnection();
 
-            PreparedStatement preparedStatement = connection.prepareStatement(String.format(SELECT_ALL_PRODUCT, search, search, search, pageAble.getNameField(), pageAble.getSortBy(), pageAble.getTotalItems(), (pageAble.getPage() - 1) * pageAble.getTotalItems()));
+            PreparedStatement preparedStatement = connection.prepareStatement(String.format(SELECT_ALL_PRODUCT,
+                    search, search, search, pageAble.getNameField(),
+                    pageAble.getSortBy(), pageAble.getTotalItems(), (pageAble.getPage() - 1) * pageAble.getTotalItems()));
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -66,7 +68,7 @@ public class ProductDAO extends DatabaseConnection {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return products;
     }
