@@ -10,30 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad133fbc-1811-49e2-ab1b-822ae342ae1a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/admin.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/demo.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/create.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/edit.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProductServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProductServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/tailwind.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/tailwind.output.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/create-account-office-dark.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/create-account-office.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/dashboard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/forgot-password-office-dark.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/forgot-password-office.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/github.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/login-office-dark.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/login-office.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/img/twitter.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/charts-bars.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/charts-lines.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/charts-pie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/focus-trap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/init-alpine.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/demo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/demo.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +179,12 @@
       <workItem from="1686653728515" duration="43000" />
       <workItem from="1686653799050" duration="3688000" />
       <workItem from="1686668607072" duration="3285000" />
-      <workItem from="1686672033123" duration="9337000" />
+      <workItem from="1686672033123" duration="10548000" />
+      <workItem from="1686715616090" duration="106000" />
+      <workItem from="1686715740975" duration="230000" />
+      <workItem from="1686715987900" duration="131000" />
+      <workItem from="1686716134055" duration="275000" />
+      <workItem from="1686716426130" duration="1868000" />
     </task>
     <servers />
   </component>
