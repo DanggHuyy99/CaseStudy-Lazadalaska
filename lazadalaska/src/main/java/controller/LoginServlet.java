@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
             //Kiểm tra mật khẩu
             //Sai thì thông báo sai mật khẩu
             //Đúng thì về trang index
+            //hello 500 ae
 
             if(product != null && PasswordEncode.check(password, product.getPassword())){
                 HttpSession session = request.getSession();
