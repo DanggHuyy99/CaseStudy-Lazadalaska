@@ -19,8 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -65,7 +65,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp\admin" />
       <recent name="C:\NguyenDangHuyy99\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp" />
     </key>
   </component>
   <component name="RunManager">
@@ -167,10 +171,30 @@
       <workItem from="1686534373386" duration="9650000" />
       <workItem from="1686618302341" duration="4568000" />
       <workItem from="1686642352536" duration="10272000" />
+      <workItem from="1686653728515" duration="43000" />
+      <workItem from="1686653799050" duration="3688000" />
+      <workItem from="1686668607072" duration="3285000" />
+      <workItem from="1686672033123" duration="10548000" />
+      <workItem from="1686715616090" duration="106000" />
+      <workItem from="1686715740975" duration="230000" />
+      <workItem from="1686715987900" duration="131000" />
+      <workItem from="1686716134055" duration="275000" />
+      <workItem from="1686716426130" duration="2260000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controller/ProductServlet.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

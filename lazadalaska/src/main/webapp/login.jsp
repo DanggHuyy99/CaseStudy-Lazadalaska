@@ -26,7 +26,9 @@
                         <span class="errors">${error}</span> </br>
                     </c:forEach>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" >
+                    <a href="admin.jsp"></a>
+                    Login </button>
             </form>
         </div>
     </div>
