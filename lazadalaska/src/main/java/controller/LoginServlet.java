@@ -25,6 +25,7 @@ public class LoginServlet extends HttpServlet {
     private final ProductService productService = new ProductService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //moi code ... dong 28
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
