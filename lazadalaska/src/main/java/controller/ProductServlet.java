@@ -17,6 +17,8 @@ import java.util.List;
 
 @WebServlet(name = "ProductServlet", urlPatterns ={ "/products","/"})
 public class ProductServlet extends HttpServlet {
+    
+    // nhat dev co code
     private ProductService productService = new ProductService();
 
     private CategoryService categoryService = new CategoryService();
