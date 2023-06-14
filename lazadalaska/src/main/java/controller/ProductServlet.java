@@ -17,8 +17,6 @@ import java.util.List;
 
 @WebServlet(name = "ProductServlet", urlPatterns ={ "/products","/"})
 public class ProductServlet extends HttpServlet {
-    
-    // nhat dev co code
     private ProductService productService = new ProductService();
 
     private CategoryService categoryService = new CategoryService();
@@ -47,6 +45,15 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 deleteProduct(req, resp);
                 break;
+//            case "create":
+//                showCreateProduct(req, resp);
+//                break;
+//            case "edit":
+//                showEditProduct(req, resp);
+//                break;
+//            case "delete":
+//                deleteProduct(req, resp);
+//                break;
             default:
                 listProduct(req, resp);
                 break;
@@ -78,6 +85,7 @@ public class ProductServlet extends HttpServlet {
     }
 
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -96,11 +104,22 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 deleteProduct(req, resp);
                 break;
+
+//            case "create":
+//                createProduct(req, resp);
+//                break;
+//            case "edit":
+//                editProduct(req, resp);
+//                break;
+//            case "delete":
+//                deleteProduct(req, resp);
+//                break;
             default:
                 listProduct(req, resp);
                 break;
         }
     }
+
     private void createProduct(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
         String name = req.getParameter("name");
         double price = Double.parseDouble(req.getParameter("price"));
