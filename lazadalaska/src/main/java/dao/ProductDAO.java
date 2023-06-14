@@ -29,7 +29,7 @@ public class ProductDAO extends DatabaseConnection {
 
     private final String SELECT_BY_USERNAME = "SELECT * FROM user where username = ?";
 
-    public List<Product> findAll(PageAble pageAble) {
+    public List<Product> findAll(PageAble pageAble){
         String search = pageAble.getSearch();
         if (search == null) search = "";
         search = "%" + search + "%";

@@ -27,51 +27,29 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        User user = productService.findByUsername(username);
+            if(user == null){
+                request.setAttribute("errors", "tài khoảng không đúng vui lòng nhập lại ");
+                request.getRequestDispatcher("login.jsp")
+                        .forward(request,response);
+                return;
+            }
 
-        List<String> errorsValidate = new ArrayList<>();
-//        if(password.length() < 8) {
-//            errorsValidate.add("Mật khẩu không được nhỏ hơn 8 kí tự");
-//        }
-//        if (!ValidateUtil.validatePassword(password)){
-//            errorsValidate.add("Phải chứa ít nhất một chữ số.\n" + "<br>" +
-//                    "Phải chứa ít nhất một chữ cái viết thường.\n" + "<br>" +
-//                    "Phải chứa ít nhất một chữ cái viết hoa.\n" + "<br>" +
-//                    "Phải chứa ít nhất một trong các ký tự đặc biệt @, #, $, %, ^, &, +, =.\n" + "<br>" +
-//                    "Không được chứa khoảng trắng.\n" + "<br>" +
-//                    "Phải có ít nhất 8 ký tự.");
-//        }
-        if(errorsValidate.size() > 0) {
-            request.setAttribute("errorsValidate", errorsValidate);
-            request.getRequestDispatcher("login.jsp")
-                    .forward(request,response);
-        } else {
-            User product = productService.findByUsername(username);
-            //=> Không tìm thấy username thì thông báo không tìm thấy usernaem này
-
-            //Có username này rồi thì sao??
-            //Kiểm tra mật khẩu
-            //Sai thì thông báo sai mật khẩu
-            //Đúng thì về trang index
-
-            if(product != null && PasswordEncode.check(password, product.getPassword())){
+            if(PasswordEncode.check(password, user.getPassword())){
                 HttpSession session = request.getSession();
-                session.setAttribute("role", product.getRole());
-                request.setAttribute("username", product.getUsername());
-                if(product.getRole() == Role.ADMIN) {
+                session.setAttribute("role", user.getRole());
+                request.setAttribute("username", user.getUsername());
+                if(user.getRole() == Role.ADMIN) {
                     response.sendRedirect("/admin");
-                } else if(product.getRole() == Role.USER) {
+                } else if(user.getRole() == Role.USER) {
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
                 }
-//            response.sendRedirect("/login");
-                return;
             } else {
-                request.setAttribute("errors", "Login Failed");
+                request.setAttribute("errors", "mật khẩu sai vui lòng nhập lại ");
                 request.getRequestDispatcher("login.jsp")
                         .forward(request,response);
             }
         }
 
 
-
-    }
 }

@@ -22,9 +22,8 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1" required>
-                    <c:forEach items="${errorsValidate}" var="error">
+
                         <span class="errors">${error}</span> </br>
-                    </c:forEach>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -42,8 +41,8 @@
         // block form submit event
         event.preventDefault()
         let username = document.getElementById("username").value;
-        if(username.length < 5) {
-            alert("Username lớn hơn 5 kí tự")
+        if(username.length < 5 || username.length > 20) {
+            alert("Username lớn hơn 5 kí tự và dưới 20 ký tự")
         } else {
                 event.currentTarget.submit();
         }
