@@ -4,6 +4,6 @@
 
 
 
-
+<a href="products">demo</a>
 
 <jsp:include page="/headandfoot/footer.jsp"></jsp:include>

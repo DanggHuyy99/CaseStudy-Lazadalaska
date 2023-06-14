@@ -1,6 +1,8 @@
 package controller;
 
 import dto.PageAble;
+import model.Category;
+import model.Product;
 import serrvice.CategoryService;
 import serrvice.ProductService;
 
@@ -11,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
-@WebServlet(name = "ProductServlet", urlPatterns = "/product")
+@WebServlet(name = "ProductServlet", urlPatterns ={ "/products","/"})
 public class ProductServlet extends HttpServlet {
+    
+    // nhat dev co code
     private ProductService productService = new ProductService();
 
     private CategoryService categoryService = new CategoryService();
@@ -23,6 +28,9 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
+        // nhatdev cpde aaaaaaaaa Huy vo thay doi
+
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
@@ -30,19 +38,43 @@ public class ProductServlet extends HttpServlet {
         String action = req.getParameter("action");
         if (action == null) action = "";
         switch (action) {
-//            case "create":
-//                showCreateProduct(req, resp);
-//                break;
-//            case "edit":
-//                showEditProduct(req, resp);
-//                break;
-//            case "delete":
-//                deleteProduct(req, resp);
-//                break;
+            case "create":
+                showCreateProduct(req, resp);
+                break;
+            case "edit":
+                showEditProduct(req, resp);
+                break;
+            case "delete":
+                deleteProduct(req, resp);
+                break;
             default:
                 listProduct(req, resp);
                 break;
         }
+    }
+    private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        productService.deleteProduct(id);
+        listProduct(req,resp);
+    }
+
+
+    private void showEditProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        // lấy customer có id bằng với id trong parameter;
+        // gửi customer qua bên edit.jsp;
+        // điều hướng tới trang edit.jsp;
+        Product product = productService.findById(id);
+        req.setAttribute("product", product);
+        req.setAttribute("category", categoryService.findAll());
+        req.getRequestDispatcher("edit.jsp").forward(req, resp);
+    }
+
+    private void showCreateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("category", categoryService.findAll());
+        req.getRequestDispatcher("create.jsp")
+                .forward(req,resp);
+
     }
 
 
@@ -55,22 +87,56 @@ public class ProductServlet extends HttpServlet {
         String action = req.getParameter("action");
         if (action == null) action = "";
         switch (action) {
-//            case "create":
-//                createProduct(req, resp);
-//                break;
-//            case "edit":
-//                editProduct(req, resp);
-//                break;
-//            case "delete":
-//                deleteProduct(req, resp);
-//                break;
+            case "create":
+                createProduct(req, resp);
+                break;
+            case "edit":
+                editProduct(req, resp);
+                break;
+            case "delete":
+                deleteProduct(req, resp);
+                break;
             default:
                 listProduct(req, resp);
                 break;
         }
     }
+    private void createProduct(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+        String name = req.getParameter("name");
+        double price = Double.parseDouble(req.getParameter("price"));
+        int quantity = Integer.parseInt(req.getParameter("quantity"));
+        int category_id = Integer.parseInt(req.getParameter("category"));
+        String describe = req.getParameter("describe");
+        String img = req.getParameter("img");
+        Category category = categoryService.findById(category_id);
+        Product product = new Product(name,price,describe,quantity,img, category);
+        req.setAttribute("product", product);
+        req.setAttribute("message", "Created");
+        req.setAttribute("category", categoryService.findAll());
+        req.getRequestDispatcher("create.jsp").forward(req,resp);
 
-    private void listProduct(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+    }
+    private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        double price = Double.parseDouble(req.getParameter("price"));
+        int quantity= Integer.parseInt(req.getParameter("quantity"));
+        int category_id = Integer.parseInt(req.getParameter("category"));
+        String describe = req.getParameter("describe");
+        String img = req.getParameter("img");
+        Category category = categoryService.findById(category_id);
+        Product product = new Product(id,name,price,describe,quantity,img, category);
+        productService.updateProduct(product);
+        req.setAttribute("product",product);
+        req.setAttribute("category", categoryService.findAll());
+        req.setAttribute("message", "edited");
+        req.getRequestDispatcher("edit.jsp").forward(req,resp);
+    }
+
+    private void listProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         String search = req.getParameter("search");
         int page = 1;
         if (req.getParameter("page") != null) {
@@ -89,11 +155,11 @@ public class ProductServlet extends HttpServlet {
 
         PageAble pageAble = new PageAble(search, page, TOTAL_ITEMS, nameField, sortBy);
 
-        req.setAttribute("product", productService.findAll(pageAble));
+        req.setAttribute("pageable", pageAble);
+        List<Product> products = productService.findAll(pageAble);
+        req.setAttribute("products", products);
+        req.getRequestDispatcher("demo.jsp").forward(req,resp);
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
 
     }
 }
