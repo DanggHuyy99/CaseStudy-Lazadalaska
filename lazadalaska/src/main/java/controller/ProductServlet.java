@@ -158,6 +158,9 @@ public class ProductServlet extends HttpServlet {
         req.setAttribute("pageable", pageAble);
         List<Product> products = productService.findAll(pageAble);
         req.setAttribute("products", products);
+
+        Category category = categoryService.findById(3);
+        req.setAttribute("category", category);
         req.getRequestDispatcher("demo.jsp").forward(req,resp);
 
 

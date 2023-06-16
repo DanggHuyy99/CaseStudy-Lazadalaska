@@ -14,5 +14,13 @@ public class CategoryService {
 
     public Category findById(int id){
         return categoryDAO.findById(id);
+}
+    public void save(Category category) {
+        categoryDAO.save(category);
     }
+    public void editCategory(Category category){
+        CategoryDAO.editCategory(category);
+
+    }
+
 }
