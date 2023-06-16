@@ -1,7 +1,10 @@
 package controller;
 
+
 import model.Category;
 import serrvice.CategoryService;
+import model.Product;
+import serrvice.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,11 +39,12 @@ public class CategoryServlet extends HttpServlet {
         req.getRequestDispatcher("category1/createcate.jsp")
                 .forward(req, resp);
     }
+
     private void showEditCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Category category = categoryService.findById(id);
         req.setAttribute("category", category);
-        req.getRequestDispatcher("category1/editcate.jsp").forward(req,resp);
+        req.getRequestDispatcher("category1/editcate.jsp").forward(req, resp);
     }
 
 
@@ -60,6 +64,7 @@ public class CategoryServlet extends HttpServlet {
 
         }
     }
+
     private void createCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         Category category = new Category(name);
@@ -72,6 +77,7 @@ public class CategoryServlet extends HttpServlet {
         req.getRequestDispatcher("category1/createcate.jsp").forward(req, resp);
 
     }
+
     private void editCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
@@ -84,3 +90,5 @@ public class CategoryServlet extends HttpServlet {
 
     }
 }
+
+

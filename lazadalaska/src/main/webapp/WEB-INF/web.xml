@@ -31,4 +31,11 @@
         <servlet-name>default</servlet-name>
         <url-pattern>*.images</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+=======
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.svg</url-pattern>
+    </servlet-mapping>
+>>>>>>> 7d4e2ce947ac30a829bb7aa651f925e5fef92efc
 </web-app>

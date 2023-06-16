@@ -33,4 +33,8 @@ public class ProductService {
     public User findByUsername(String username) {
         return productDAO.findByUsername(username);
     }
+
+    public List<Product> findProductByCategoryName(String name){
+        return productDAO.findProductByCategoryName(name);
+    }
 }

@@ -24,7 +24,7 @@
                     <th class="px-4 py-3">Name</th>
                     <th class="px-4 py-3">Price</th>
                     <th class="px-4 py-3">Describe</th>
-                    <th class="px-4 py-3">Quantity</th>
+                    <th class="px-4 py-3">Quantity</t   h>
                     <th class="px-4 py-3">IMG</th>
                     <th class="px-4 py-3">Action</th>
                 </tr>

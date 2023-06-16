@@ -25,33 +25,31 @@ public class LoginServlet extends HttpServlet {
     private final ProductService productService = new ProductService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //moi code ... dong 28
-        //code dong 29
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = productService.findByUsername(username);
-            if(user == null){
-                request.setAttribute("errors", "tài khoảng không đúng vui lòng nhập lại ");
-                request.getRequestDispatcher("login.jsp")
-                        .forward(request,response);
-                return;
-            }
 
-            if(PasswordEncode.check(password, user.getPassword())){
-                HttpSession session = request.getSession();
-                session.setAttribute("role", user.getRole());
-                request.setAttribute("username", user.getUsername());
-                if(user.getRole() == Role.ADMIN) {
-                    response.sendRedirect("/admin");
-                } else if(user.getRole() == Role.USER) {
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                }
-            } else {
-                request.setAttribute("errors", "mật khẩu sai vui lòng nhập lại ");
-                request.getRequestDispatcher("login.jsp")
-                        .forward(request,response);
-            }
+        User user = productService.findByUsername(username);
+        if (user == null) {
+            request.setAttribute("errors", "Tài khoản không đúng hoặc không tồn tại");
+            request.getRequestDispatcher("/login/login.jsp")
+                    .forward(request, response);
+            return;
         }
 
-
+        if (PasswordEncode.check(password, user.getPassword())) {
+            HttpSession session = request.getSession();
+            session.setAttribute("role", user.getRole());
+            request.setAttribute("username", user.getUsername());
+            if (user.getRole() == Role.ADMIN) {
+                response.sendRedirect("/admin");
+            } else if (user.getRole() == Role.USER) {
+                request.getRequestDispatcher("/products").forward(request, response);
+//                response.sendRedirect("/home.jsp");
+            }
+        } else {
+            request.setAttribute("errors", "Mật khẩu sai");
+            request.getRequestDispatcher("/login/login.jsp")
+                    .forward(request, response);
+        }
+    }
 }

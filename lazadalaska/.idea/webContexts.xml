@@ -6,6 +6,8 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/category1/createcate.jsp" value="file://$PROJECT_DIR$/src/main/webapp/category1" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/createcate.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/headandfoot/f.jsp" value="file://$PROJECT_DIR$/src/main/webapp/headandfoot" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/home.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>
   </component>
