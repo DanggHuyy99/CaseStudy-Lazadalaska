@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-@WebServlet(name = "ProductServlet", urlPatterns ={ "/products","/"})
+@WebServlet(name = "ProductServlet", urlPatterns ="/products")
 public class ProductServlet extends HttpServlet {
     
     // nhat dev co code
@@ -163,11 +163,7 @@ public class ProductServlet extends HttpServlet {
 
         List<Product> products = productService.findAll(pageAble);
         req.setAttribute("products", products);
-
-
-        Category category = categoryService.findById(3);
-        req.setAttribute("category", category);
-        req.getRequestDispatcher("demo.jsp").forward(req,resp);
+        
 
         req.setAttribute("productsJSON", convertListToJson(products));
         req.getRequestDispatcher("/home.jsp").forward(req,resp);
