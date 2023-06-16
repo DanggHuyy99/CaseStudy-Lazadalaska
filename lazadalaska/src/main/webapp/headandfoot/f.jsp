@@ -443,46 +443,54 @@
         console.log(cart)
         $('#cart-items').append(cart);
 
-        // cartTotal += parseFloat(formattedPrice.replace(/\./g, '').replace(',', '.'));
-        // $('.header-cart-total').text('Total: ' + formatPrice(cartTotal));
+        cartTotal += parseFloat(formattedPrice.replace(/\./g, '').replace(',', '.'));
 
 
-
-        var currentProduct = JSON.parse(localStorage.getItem("cart"));
-        if (!currentProduct) {
-            currentProduct = [];
-        }
-        currentProduct.push({
-            img: imgProduct1,
+        var currentCart = JSON.parse(localStorage.getItem("cart"));
+        if(!currentCart) currentCart = [];
+        var product = {
             name: nameProduct,
-            price: formattedPrice
-        });
+            price: formattedPrice,
+            img: imgProduct1
+        };
+        currentCart.push(product);
+        let tongtien = 0;
 
-        localStorage.setItem("cart", JSON.stringify(currentProduct));
+        for (const cart of currentCart) {
+            tongtien+= convertFormattedPriceToNumber(cart.price);
+        }
 
-        // Cập nhật hiển thị của giỏ hàng sau khi thêm sản phẩm
+
+        $('.header-cart-total').text('Total: ' + formatPrice(tongtien));
+
+        localStorage.setItem("cart", JSON.stringify(currentCart));
+
+
         updateCartDisplay();
     });
     function formatPrice(price) {
         // Sử dụng hàm toLocaleString() để định dạng giá trị tiền tệ
         return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
+    function convertFormattedPriceToNumber(formattedPrice) {
+        // Remove any non-digit characters from the string
+        const numericString = formattedPrice.replace(/[^\d]/g, '');
+
+        // Parse the numeric string as an integer
+        const numericValue = parseInt(numericString, 10);
+
+        return numericValue;
+    }
 
     function updateCartDisplay() {
         var cartItems = JSON.parse(localStorage.getItem("cart"));
 
-        // Xóa các mục cũ trong giỏ hàng
         $('#cart-items').empty();
 
-        // Thêm mục mới vào giỏ hàng
         cartItems.forEach(function (item) {
             var cartItem = updateCartHtml(item.img, item.name, item.price);
             $('#cart-items').append(cartItem);
         });
-
-        // Cập nhật tổng giá trị của giỏ hàng
-        var cartTotal = calculateCartTotal(cartItems);
-        $('.header-cart-total').text('Total: ' + formatPrice(cartTotal));
     }
     $(document).ready(function () {
         updateCartDisplay();

@@ -12,13 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "CategoryServlet", urlPatterns ="/categories")
 public class CategoryServlet extends HttpServlet {
-    private CategoryService categoryService = new CategoryService();
+    private ProductService productService = new ProductService();
 
+    private CategoryService categoryService = new CategoryService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         String action = req.getParameter("action");
         if (action == null) {
             action = "";
@@ -29,6 +34,8 @@ public class CategoryServlet extends HttpServlet {
                 break;
             case "create":
                 showCreateCategory(req, resp);
+            default:
+                listProduct(req,resp);
                 break;
         }
 
@@ -88,6 +95,12 @@ public class CategoryServlet extends HttpServlet {
         req.getRequestDispatcher("category1/editcate.jsp").forward(req, resp);
 
 
+    }
+    private void listProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String category = req.getParameter("category");
+        List<Product> products = productService.findProductByCategoryName(category);
+        req.setAttribute("products", products);
+        req.getRequestDispatcher("home.jsp").forward(req, resp);
     }
 }
 
