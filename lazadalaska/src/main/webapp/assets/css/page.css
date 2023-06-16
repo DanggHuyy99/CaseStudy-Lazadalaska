@@ -1,0 +1,85 @@
+page-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #ffffff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+page-link:hover {
+    background-color: #ff6600;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+page-link {
+    animation: fadeInOut 2s infinite;
+}
+
+.search-container {
+    position: absolute;
+    display: inline-block;
+}
+
+#searchInput {
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    font-size: 16px;
+    width: 200px;
+}
+#searchInput::before {
+    content: "Trước";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    font-style: italic;
+}
+
+#searchInput::after {
+    content: "Sau";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    font-style: italic;
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.fa-search {
+    color: #555;
+    font-size: 20px;
+}
+
+.fa-search:hover{
+    color: red;
+    font-size: 20px;
+}
+
+

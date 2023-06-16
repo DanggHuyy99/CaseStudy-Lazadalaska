@@ -1,5 +1,7 @@
 package controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.PageAble;
 import model.Category;
 import model.Product;
@@ -23,7 +25,7 @@ public class ProductServlet extends HttpServlet {
 
     private CategoryService categoryService = new CategoryService();
 
-    private int TOTAL_ITEMS = 5;
+    private int TOTAL_ITEMS = 16;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -137,13 +139,14 @@ public class ProductServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
+
         String search = req.getParameter("search");
         int page = 1;
         if (req.getParameter("page") != null) {
             page = Integer.parseInt(req.getParameter("page"));
         }
 
-        String sortBy = req.getParameter("soryBy");
+        String sortBy = req.getParameter("sortBy");
         if (sortBy == null) {
             sortBy = "asc";
         }
@@ -156,11 +159,25 @@ public class ProductServlet extends HttpServlet {
         PageAble pageAble = new PageAble(search, page, TOTAL_ITEMS, nameField, sortBy);
 
         req.setAttribute("pageable", pageAble);
+        req.setAttribute("categories", categoryService.findAll());
+
         List<Product> products = productService.findAll(pageAble);
         req.setAttribute("products", products);
-        req.getRequestDispatcher("demo.jsp").forward(req,resp);
+        req.setAttribute("productsJSON", convertListToJson(products));
+        req.getRequestDispatcher("/home.jsp").forward(req,resp);
 
 
+    }
+    public static String convertListToJson(List<?> list) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            return objectMapper.writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
 
