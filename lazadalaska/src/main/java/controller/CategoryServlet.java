@@ -25,7 +25,7 @@ public class CategoryServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
         String action = req.getParameter("action");
-        if (action == null) {
+        if (action == null){
             action = "";
         }
         switch (action) {
@@ -35,8 +35,6 @@ public class CategoryServlet extends HttpServlet {
             case "create":
                 showCreateCategory(req, resp);
             default:
-                listProduct(req,resp);
-                break;
         }
 
     }
@@ -61,7 +59,7 @@ public class CategoryServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        switch (action) {
+        switch (action){
             case "edit":
                 editCategory(req, resp);
                 break;
@@ -90,13 +88,12 @@ public class CategoryServlet extends HttpServlet {
         String name = req.getParameter("name");
         Category category = new Category(id, name);
         categoryService.editCategory(category);
-//        req.setAttribute("categorys", categoryService.findAll());
         req.setAttribute("message", "đã sữa thành công ");
         req.getRequestDispatcher("category1/editcate.jsp").forward(req, resp);
 
 
     }
-    private void listProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void listproduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String category = req.getParameter("category");
         List<Product> products = productService.findProductByCategoryName(category);
         req.setAttribute("products", products);

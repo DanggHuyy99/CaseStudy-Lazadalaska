@@ -1,9 +1,12 @@
 package controller;
 
 
+import dao.CategoryDAO;
+import dao.UserDAO;
 import model.Role;
 import model.User;
 import serrvice.ProductService;
+import serrvice.UserService;
 import util.PasswordEncode;
 import util.ValidateUtil;
 
@@ -23,22 +26,8 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private final ProductService productService = new ProductService();
+    private final UserService userService = new UserService();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
-        String action = req.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            default:
-                showLoginPage(req,resp);
-                break;
-        }
-    }
 
     private void showLoginPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/login/login.jsp")
@@ -46,9 +35,25 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
+        String action = request.getParameter("action");
+        if (action == null) action = "";
+        switch (action) {
+            case "login":
+                login(request,response);
+                break;
+            case "createUser":
+                createUser(request,response);
+                break;
+        }
+    }
+
+    public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         User user = productService.findByUsername(username);
         if (user == null) {
             request.setAttribute("errors", "Tài khoản không đúng hoặc không tồn tại");
@@ -61,15 +66,16 @@ public class LoginServlet extends HttpServlet {
         if (PasswordEncode.check(password, user.getPassword())) {
 
             session.setAttribute("role", user.getRole());
+            session.setAttribute("username", user.getUsername());
             request.setAttribute("username", user.getUsername());
             if (user.getRole() == Role.ADMIN) {
                 response.sendRedirect("/admin/dashboard");
                 session.setAttribute("user",user);
                 session.setAttribute("id",user.getId());
             } else if (user.getRole() == Role.USER) {
-                request.getRequestDispatcher("/products").forward(request, response);
-//                response.sendRedirect("/home.jsp");
+                response.sendRedirect("/admin");
             }
+                request.getRequestDispatcher("/products").forward(request, response);
         } else {
             request.setAttribute("errors", "Mật khẩu sai");
             request.getRequestDispatcher("/login/login.jsp")
@@ -77,6 +83,55 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
+        String action = req.getParameter("action");
+        if (action == null) action = "";
+        switch (action) {
+            case "login":
+                showLogin(req,resp);
+                break;
+            case "createUser":
+                showCreateuser(req,resp);
+                break;
+
+        }
+
+    }
+
+    private void showLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/login/login.jsp")
+                .forward(req, resp);
+    }
+
+    private void showCreateuser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.setAttribute("user", userService.findAll());
+        req.getRequestDispatcher("/login/createuser.jsp")
+                .forward(req, resp);
+
+    }
+    private void createUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("username");
+        String password = req.getParameter("password");
+//        String mail = req.getParameter("mail");
+//        String fullname = req.getParameter("fullname");
+//        String phone = req.getParameter("phone");
+//        String img = req.getParameter("img");
+//        String address = req.getParameter("address");
+        User user = new User(name,password,Role.USER);
+        userService.createUser(user);
+        req.setAttribute("user" , user);
+        req.setAttribute("message", "đã đăng ký thành công");
+//        req.setAttribute("createuser", userService.findAll());
+        req.getRequestDispatcher("/login/createuser.jsp").forward(req, resp);
+
+
+
+    }
 
 
 }

@@ -9,14 +9,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class UserDAO extends DatabaseConnection {
     private final String SELECT_USER = "SELECT * FROM user";
     private final String CREATE_USER = "INSERT INTO `lazadalaska`.`user` (`username`, `password`, `email`, `fullname`, `phone`, `role`) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String UPDATE_USER = "UPDATE `lazadalaska`.`user` SET  `email` = ?, `fullname` = ?, `phone` = ? ,`address` = ? ,`img` = ?WHERE (`id` = ?)";
-    private final String SELECT_USERNAME = "SELECT u.username FROM lazadalaska.user u";
+
     private final String UPDATE_PASSWORD =  "UPDATE `lazadalaska`.`user` SET  `password` = ? WHERE (`id` = ?)";
+    private final String UPDATE_USER = "UPDATE `lazadalaska`.`user` SET `username` = ?, `password` = ?, `email` = ?, `fullname` = ?, `phone` = ? WHERE (`id` = ?)";
     private final String SELECT_USER_BY_ID = "SELECT p.* FROM lazadalaska.user p where p.id = ?";
 
+    private final String SELECT_USERNAME = "SELECT u.username FROM lazadalaska.user u";
 
     public ArrayList<User> findAll() {
         ArrayList<User> userList = new ArrayList<>();
@@ -41,47 +48,7 @@ public class UserDAO extends DatabaseConnection {
         }
         return userList;
     }
-    public User findById(int id) {
-        try {
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int idUser = resultSet.getInt("id");
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                String email = resultSet.getString("email");
-                String fullname = resultSet.getString("fullname");
-                String phone = resultSet.getString("phone");
-                String address = resultSet.getString("address");
-                String img = resultSet.getString("img");
-                return new User(idUser, username,password,email,fullname,phone,address,img);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
 
-    public boolean createUser(User user) {
-        try {
-            PreparedStatement statement = getConnection().prepareStatement(CREATE_USER);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getFullname());
-            statement.setString(5, user.getPhone());
-            statement.setString(6, String.valueOf(Role.USER));
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public boolean updateUser(User user) {
         try {
@@ -142,5 +109,44 @@ public class UserDAO extends DatabaseConnection {
         }
         return false;
     }
+    public User findById(int id) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idUser = resultSet.getInt("id");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String email = resultSet.getString("email");
+                String fullname = resultSet.getString("fullname");
+                String phone = resultSet.getString("phone");
+                String address = resultSet.getString("address");
+                String img = resultSet.getString("img");
+                return new User(username,password,email,fullname,phone,address);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public void createUser(User user){
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER )) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, "");
+            preparedStatement.setString(4, "");
+            preparedStatement.setString(5, "");
+            preparedStatement.setString(6, String.valueOf(Role.USER));
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
+

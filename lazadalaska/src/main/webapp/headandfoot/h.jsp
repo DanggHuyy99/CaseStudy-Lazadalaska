@@ -155,9 +155,15 @@
             <li>
               <a href="about.html">About</a>
             </li>
-
             <li>
-              <a href="/login/login.jsp">Log in</a>
+
+              <c:if test="${sessionScope.username != null}">
+                <a class="mr-2" href="">Hello <%=session.getAttribute("username")%></a>
+                <a href="/products?action=logout">log out</a>
+              </c:if>
+              <c:if test="${sessionScope.username == null}">
+                <a href="/login?action=login">Log in</a>
+              </c:if>
             </li>
           </ul>
         </div>
@@ -189,8 +195,11 @@
 
     <!-- Icon header -->
     <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+
+
       <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
         <i class="zmdi zmdi-search"></i>
+
       </div>
 
       <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
@@ -369,7 +378,7 @@
             View Cart
           </a>
 
-          <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+          <a href="/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" onclick="return confirm('Vui lòng đăng nhập để thanh toán?')" >
             Check Out
           </a>
         </div>
@@ -595,6 +604,7 @@
         </div>
 
         <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+          <p>User</p>
           <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
           <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
           Search

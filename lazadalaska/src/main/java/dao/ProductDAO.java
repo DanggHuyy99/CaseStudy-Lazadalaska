@@ -18,7 +18,7 @@ public class ProductDAO extends DatabaseConnection {
     private final String CREATE_PRODUCT = "INSERT INTO `lazadalaska`.`product` (`name`, `price`, `describe`, `quantity`, `img`, `category_id`) VALUES (?, ?, ?, ?, ?, ?)";
     private final String UPDATE_PRODUCT = "UPDATE `lazadalaska`.`product` SET `name` = ?, `price` = ?, `describe` = ?, `quantity` = ?, `img` = ?, `category_id` = ? WHERE (`id` = ?)";
     private final String DELETE_PRODUCT = "DELETE FROM `lazadalaska`.`product` WHERE (`id` = ?)";
-    private final String SELECT_BY_USERNAME = "SELECT * FROM user where username = ?";
+    private final String SELECT_BY_USERNAME = "SELECT * FROM user where username = ?;";
     private final String SELECT_PRODUCT_BY_CATEGORY = "SELECT p.*, c.name as `category_name` FROM lazadalaska.product p left join category c on p.category_id = c.id where c.name = ?";
     public List<Product> findAll(PageAble pageAble) {
         String search = pageAble.getSearch();
@@ -133,7 +133,7 @@ public class ProductDAO extends DatabaseConnection {
                 String password = rs.getString("password");
                 String email = rs.getString("email");
                 String fullname = rs.getString("fullname");
-                String phone = String.valueOf(Integer.parseInt(rs.getString("phone")));
+                String phone = rs.getString("phone");
                 Role role = Role.valueOf(rs.getString("role"));
                 String address = rs.getString("address");
                 String img = rs.getString("img");
