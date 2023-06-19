@@ -5,34 +5,34 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.PageAble;
 import model.Category;
 import model.Product;
+import model.User;
 import serrvice.CategoryService;
 import serrvice.ProductService;
+import serrvice.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @WebServlet(name = "ProductServlet", urlPatterns ="/products")
 public class ProductServlet extends HttpServlet {
-    
-    // nhat dev co code
+
+
     private ProductService productService = new ProductService();
 
     private CategoryService categoryService = new CategoryService();
+    private UserService userService = new UserService();
 
     private int TOTAL_ITEMS = 16;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
-        // nhatdev cpde aaaaaaaaa Huy vo thay doi
-
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
@@ -49,23 +49,25 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 deleteProduct(req, resp);
                 break;
+            case "logout":
+                logout(req, resp);
+                break;
+
             default:
                 listProduct(req, resp);
                 break;
         }
     }
+
     private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         int id = Integer.parseInt(req.getParameter("id"));
         productService.deleteProduct(id);
-        listProduct(req,resp);
+        listProduct(req, resp);
     }
 
 
     private void showEditProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        // lấy customer có id bằng với id trong parameter;
-        // gửi customer qua bên edit.jsp;
-        // điều hướng tới trang edit.jsp;
         Product product = productService.findById(id);
         req.setAttribute("product", product);
         req.setAttribute("category", categoryService.findAll());
@@ -75,7 +77,7 @@ public class ProductServlet extends HttpServlet {
     private void showCreateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("category", categoryService.findAll());
         req.getRequestDispatcher("create.jsp")
-                .forward(req,resp);
+                .forward(req, resp);
 
     }
 
@@ -98,12 +100,14 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 deleteProduct(req, resp);
                 break;
+
             default:
                 listProduct(req, resp);
                 break;
         }
     }
-    private void createProduct(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+
+    private void createProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         double price = Double.parseDouble(req.getParameter("price"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
@@ -111,28 +115,29 @@ public class ProductServlet extends HttpServlet {
         String describe = req.getParameter("describe");
         String img = req.getParameter("img");
         Category category = categoryService.findById(category_id);
-        Product product = new Product(name,price,describe,quantity,img, category);
+        Product product = new Product(name, price, describe, quantity, img, category);
         req.setAttribute("product", product);
         req.setAttribute("message", "Created");
         req.setAttribute("category", categoryService.findAll());
-        req.getRequestDispatcher("create.jsp").forward(req,resp);
+        req.getRequestDispatcher("create.jsp").forward(req, resp);
 
     }
-    private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+    private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         double price = Double.parseDouble(req.getParameter("price"));
-        int quantity= Integer.parseInt(req.getParameter("quantity"));
+        int quantity = Integer.parseInt(req.getParameter("quantity"));
         int category_id = Integer.parseInt(req.getParameter("category"));
         String describe = req.getParameter("describe");
         String img = req.getParameter("img");
         Category category = categoryService.findById(category_id);
-        Product product = new Product(id,name,price,describe,quantity,img, category);
+        Product product = new Product(id, name, price, describe, quantity, img, category);
         productService.updateProduct(product);
-        req.setAttribute("product",product);
+        req.setAttribute("product", product);
         req.setAttribute("category", categoryService.findAll());
         req.setAttribute("message", "edited");
-        req.getRequestDispatcher("edit.jsp").forward(req,resp);
+        req.getRequestDispatcher("edit.jsp").forward(req, resp);
     }
 
     private void listProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -163,14 +168,14 @@ public class ProductServlet extends HttpServlet {
 
         List<Product> products = productService.findAll(pageAble);
         req.setAttribute("products", products);
-        
+
 
         req.setAttribute("productsJSON", convertListToJson(products));
-        req.getRequestDispatcher("/home.jsp").forward(req,resp);
-
+        req.getRequestDispatcher("/home.jsp").forward(req, resp);
 
 
     }
+
     public static String convertListToJson(List<?> list) {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -182,6 +187,17 @@ public class ProductServlet extends HttpServlet {
 
         return null;
     }
-}
+
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession();
+        session.invalidate();
+        resp.sendRedirect("/products");
+    }
+
+
+    }
+
+
+
 
 

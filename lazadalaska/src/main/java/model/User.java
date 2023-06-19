@@ -14,6 +14,12 @@ public class User {
     private String phone;
 
     private Role role;
+    private String address;
+    private String img;
+
+
+    public User(String username, String password, String email, String fullname, String phone, String address) {
+    }
 
     public User(int id, String username, String password, String email, String fullname, String phone, Role role) {
         this.id = id;
@@ -23,6 +29,7 @@ public class User {
         this.fullname = fullname;
         this.phone = phone;
         this.role = role;
+
     }
 
     public User(String username, String password, String email, String fullname, String phone, Role role) {
@@ -33,6 +40,12 @@ public class User {
         this.phone = phone;
         this.role = role;
     }
+
+    public User(String name, String password) {
+        this.username = name;
+        this.password = password;
+    }
+
 
     public int getId() {
         return id;
@@ -88,5 +101,33 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public User(int id, String username, String password, String email, String fullname, String phone, Role role, String address, String img) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+        this.img = img;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

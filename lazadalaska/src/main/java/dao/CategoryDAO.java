@@ -57,7 +57,6 @@ public class CategoryDAO extends DatabaseConnection {
         return null;
     }
 
-    //viet chieu 14/6 5h chieu
     public void save(Category category) {
         try {
             Connection connection = getConnection();

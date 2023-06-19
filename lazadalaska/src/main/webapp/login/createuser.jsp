@@ -13,7 +13,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <form action="/login" method="post" id="formLogin">
+            <form action="/login?action=createUser" method="post" id="formLogin">
                 <span class="errors">${error}</span>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -25,8 +25,11 @@
                     <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1" required>
                 </div>
                 <button type="submit" class="btn btn-primary" >
-                    <a href="admin.jsp"></a>
-                    Log In </button>
+<%--                    <a href="admin.jsp"></a>--%>
+                    Đăng Ký </button>
+                <c:if test="${requestScope['message'] != null}">
+                    <span>${message}</span>
+                </c:if>
             </form>
         </div>
     </div>
@@ -45,7 +48,7 @@
         if(username.length < 5 || username.length > 20) {
             alert("Username lớn hơn 5 kí tự và dưới 20 ký tự")
         } else {
-                event.currentTarget.submit();
+            event.currentTarget.submit();
         }
 
     });
