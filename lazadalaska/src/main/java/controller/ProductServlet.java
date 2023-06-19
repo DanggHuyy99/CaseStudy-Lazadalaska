@@ -74,7 +74,7 @@ public class ProductServlet extends HttpServlet {
 
     private void showCreateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("category", categoryService.findAll());
-        req.getRequestDispatcher("create.jsp")
+        req.getRequestDispatcher("/admin/create.jsp")
                 .forward(req,resp);
 
     }

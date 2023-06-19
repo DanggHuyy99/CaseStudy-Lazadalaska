@@ -1,20 +1,24 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Windmill Dashboard</title>
     <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+    <link rel="stylesheet" href="../assets/css/tailwind.output.css"/>
     <script
             src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
             defer
     ></script>
-    <script src="./assets/js/init-alpine.js"></script>
+    <script src="../assets/js/init-alpine.js"></script>
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
@@ -23,8 +27,8 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
             defer
     ></script>
-    <script src="./assets/js/charts-lines.js" defer></script>
-    <script src="./assets/js/charts-pie.js" defer></script>
+    <script src="../assets/js/charts-lines.js" defer></script>
+    <script src="../assets/js/charts-pie.js" defer></script>
 </head>
 <body>
 <div
@@ -50,7 +54,7 @@
               ></span>
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                            href="index.html"
+                            href="/bill"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -63,7 +67,8 @@
                                 stroke="currentColor"
                         >
                             <path
-                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1
+                                     0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                             ></path>
                         </svg>
                         <span class="ml-4">Đơn Hàng</span>
@@ -73,8 +78,9 @@
             <ul>
                 <li class="relative px-6 py-3">
                     <a
-                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="demo.jsp"
+                            class="inline-flex items-center w-full text-sm font-semibold t
+                            ransition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                            href="/admin/product.jsp"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -87,63 +93,80 @@
                                 stroke="currentColor"
                         >
                             <path
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2
+                                     2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M
+                                     9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                             ></path>
                         </svg>
                         <span class="ml-4">Các Đơn hàng chưa được sử lý</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100" href="table.html">
-                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                       href="/admin/product">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
                         <span class="ml-4">Product</span>
                     </a>
-                        <svg
-                                class="w-5 h-5"
-                                aria-hidden="true"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                        >
-                            <path
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                            ></path>
-                        </svg>
-                        <span class="ml-4">Danh Sách Sản Phẩm</span>
-                    </a>
-                </li>
+                    <svg
+                            class="w-5 h-5"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                    >
 
-                <li class="relative px-6 py-3">
-                    <a
-                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="demo.jsp"
-                    >
-                        <svg
-                                class="w-5 h-5"
-                                aria-hidden="true"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                        >
-                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                        </svg>
-                        <span class="ml-4">Doanh thu</span>
-                    </a>
-                </li>
-                <li class="relative px-6 py-3">
-                    <button
-                            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            @click="togglePagesMenu"
-                            aria-haspopup="true"
-                    >
+                        <li class="relative px-6 py-3">
+                            <a
+                                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    href="/admin/product.jsp"
+                            >
+                                <svg
+                                        class="w-5 h-5"
+                                        aria-hidden="true"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                >
+                                    <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                                <span class="ml-4">Doanh thu</span>
+                            </a>
+                        </li>
+                        <li class="relative px-6 py-3">
+                            <a
+                                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    href="/profile"
+                            >
+                                <svg
+                                        class="w-5 h-5"
+                                        aria-hidden="true"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                >
+                                    <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                                <span class="ml-4">Quản lý Users</span>
+                            </a>
+                        </li>
+                        <li class="relative px-6 py-3">
+                            <button
+                                    class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    @click="togglePagesMenu"
+                                    aria-haspopup="true"
+                            >
                 <span class="inline-flex items-center">
                   <svg
                           class="w-5 h-5"
@@ -161,62 +184,62 @@
                   </svg>
                   <span class="ml-4">Pages</span>
                 </span>
-                        <svg
-                                class="w-4 h-4"
-                                aria-hidden="true"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                        >
-                            <path
-                                    fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"
-                            ></path>
-                        </svg>
-                    </button>
-                    <template x-if="isPagesMenuOpen">
-                        <ul
-                                x-transition:enter="transition-all ease-in-out duration-300"
-                                x-transition:enter-start="opacity-25 max-h-0"
-                                x-transition:enter-end="opacity-100 max-h-xl"
-                                x-transition:leave="transition-all ease-in-out duration-300"
-                                x-transition:leave-start="opacity-100 max-h-xl"
-                                x-transition:leave-end="opacity-0 max-h-0"
-                                class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
-                                aria-label="submenu"
-                        >
-                            <li
-                                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            >
-                                <a class="w-full" href="pages/login.html">Login</a>
-                            </li>
-                            <li
-                                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            >
-                                <a class="w-full" href="pages/create-account.html">
-                                    Create account
-                                </a>
-                            </li>
-                            <li
-                                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            >
-                                <a class="w-full" href="pages/forgot-password.html">
-                                    Forgot password
-                                </a>
-                            </li>
-                            <li
-                                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            >
-                                <a class="w-full" href="pages/404.html">404</a>
-                            </li>
-                            <li
-                                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            >
-                                <a class="w-full" href="pages/blank.html">Blank</a>
-                            </li>
-                        </ul>
-                    </template>
-                </li>
+                                <svg
+                                        class="w-4 h-4"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                >
+                                    <path
+                                            fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </button>
+                            <template x-if="isPagesMenuOpen">
+                                <ul
+                                        x-transition:enter="transition-all ease-in-out duration-300"
+                                        x-transition:enter-start="opacity-25 max-h-0"
+                                        x-transition:enter-end="opacity-100 max-h-xl"
+                                        x-transition:leave="transition-all ease-in-out duration-300"
+                                        x-transition:leave-start="opacity-100 max-h-xl"
+                                        x-transition:leave-end="opacity-0 max-h-0"
+                                        class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                                        aria-label="submenu"
+                                >
+                                    <li
+                                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    >
+                                        <a class="w-full" href="pages/login.html">Login</a>
+                                    </li>
+                                    <li
+                                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    >
+                                        <a class="w-full" href="pages/create-account.html">
+                                            Create account
+                                        </a>
+                                    </li>
+                                    <li
+                                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    >
+                                        <a class="w-full" href="pages/forgot-password.html">
+                                            Forgot password
+                                        </a>
+                                    </li>
+                                    <li
+                                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    >
+                                        <a class="w-full" href="pages/404.html">404</a>
+                                    </li>
+                                    <li
+                                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                    >
+                                        <a class="w-full" href="pages/blank.html">Blank</a>
+                                    </li>
+                                </ul>
+                            </template>
+                        </li>
             </ul>
             <div class="px-6 my-6">
                 <button
@@ -291,7 +314,7 @@
                 <li class="relative px-6 py-3">
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="forms.html"
+                            href="/admin/bill.jsp"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -402,7 +425,7 @@
                 <li class="relative px-6 py-3">
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="demo.jsp"
+                            href="/admin/product.jsp"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -469,7 +492,7 @@
                             <li
                                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                             >
-                                <a class="w-full" href="/login/login.jsp">Login</a>
+                                <a class="w-full" href="/login.jsp">Login</a>
                             </li>
                             <li
                                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -534,32 +557,36 @@
                     </svg>
                 </button>
                 <!-- Search input -->
-                <div class="flex justify-center flex-1 lg:mr-32">
-                    <div
-                            class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
-                    >
-                        <div class="absolute inset-y-0 flex items-center pl-2">
-                            <svg
-                                    class="w-4 h-4"
-                                    aria-hidden="true"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                            >
-                                <path
-                                        fill-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        clip-rule="evenodd"
-                                ></path>
-                            </svg>
+                <form action="/handleproduct" method="get" class="flex justify-center flex-1 lg:mr-32">
+                    <div class="flex justify-center flex-1 lg:mr-32">
+                        <div
+                                class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
+                        >
+                            <div class="absolute inset-y-0 flex items-center pl-2">
+                                <svg
+                                        class="w-4 h-4"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                >
+                                    <path
+                                            fill-rule="evenodd"
+                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                            clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <input
+                                    class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                                    type="text"
+                                    placeholder="Search for products"
+                                    aria-label="Search"
+                            />
                         </div>
-                        <input
-                                class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                                type="text"
-                                placeholder="Search for projects"
-                                aria-label="Search"
-                        />
+
                     </div>
-                </div>
+                </form>
+
                 <ul class="flex items-center flex-shrink-0 space-x-6">
                     <!-- Theme toggler -->
                     <li class="flex">
@@ -678,7 +705,8 @@
                         >
                             <img
                                     class="object-cover w-8 h-8 rounded-full"
-                                    src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                                    src="${user.img}"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBZDa-lRYinVJyungmPN-xWhHKF6b108TBaVlA8I8&s"
                                     alt=""
                                     aria-hidden="true"
                             />
@@ -713,7 +741,9 @@
                                             ></path>
                                         </svg>
                                         <span>${username}</span>
-                                        <span>Profile</span>
+                                        <span>
+                                            <a href="/profile?action=myProfile&id=${sessionScope.id}"> profile</a>
+                                            </span>
                                     </a>
                                 </li>
                                 <li class="flex">
@@ -767,10 +797,4 @@
                 </ul>
             </div>
         </header>
-        <main class="h-full overflow-y-auto">
-
-        </main>
-    </div>
-</div>
-</body>
-</html>
+        <main>

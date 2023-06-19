@@ -135,7 +135,9 @@ public class ProductDAO extends DatabaseConnection {
                 String fullname = rs.getString("fullname");
                 String phone = String.valueOf(Integer.parseInt(rs.getString("phone")));
                 Role role = Role.valueOf(rs.getString("role"));
-                return new User(id, name,password, email, fullname, phone, role);
+                String address = rs.getString("address");
+                String img = rs.getString("img");
+                return new User(id, name,password, email, fullname, phone, role,address,img);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

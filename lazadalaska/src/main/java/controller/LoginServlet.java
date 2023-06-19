@@ -24,6 +24,27 @@ public class LoginServlet extends HttpServlet {
 
     private final ProductService productService = new ProductService();
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            default:
+                showLoginPage(req,resp);
+                break;
+        }
+    }
+
+    private void showLoginPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/login/login.jsp")
+                .forward(req, resp);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -36,12 +57,15 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        HttpSession session = request.getSession();
         if (PasswordEncode.check(password, user.getPassword())) {
-            HttpSession session = request.getSession();
+
             session.setAttribute("role", user.getRole());
             request.setAttribute("username", user.getUsername());
             if (user.getRole() == Role.ADMIN) {
-                response.sendRedirect("/admin");
+                response.sendRedirect("/admin/dashboard");
+                session.setAttribute("user",user);
+                session.setAttribute("id",user.getId());
             } else if (user.getRole() == Role.USER) {
                 request.getRequestDispatcher("/products").forward(request, response);
 //                response.sendRedirect("/home.jsp");
@@ -52,4 +76,7 @@ public class LoginServlet extends HttpServlet {
                     .forward(request, response);
         }
     }
+
+
+
 }
