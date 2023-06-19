@@ -73,9 +73,8 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user",user);
                 session.setAttribute("id",user.getId());
             } else if (user.getRole() == Role.USER) {
-                response.sendRedirect("/admin");
-            }
                 request.getRequestDispatcher("/products").forward(request, response);
+            }
         } else {
             request.setAttribute("errors", "Mật khẩu sai");
             request.getRequestDispatcher("/login/login.jsp")
