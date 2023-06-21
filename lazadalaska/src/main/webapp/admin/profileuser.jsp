@@ -43,17 +43,16 @@
     color: #fff;
   }
 </style>
-<h1>${action}</h1>
-<c:if test="${requestScope['users'].size() != 0}">
+
   <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
     <div class="w-full overflow-x-auto">
       <table class="w-full">
-        <c:forEach items="${users}" var="user">
+
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <tr class="text-gray-700 dark:text-gray-400" style="border: 1px solid #d5d6d7">
             <td><label>IMG :</label></td>
             <td class="px-4 py-3">
-                ${user.img}
+              <img src="${user.img}">
             </td>
           </tr>
           <tr>
@@ -81,15 +80,14 @@
             </td>
           </tr>
           <tr>
-            <td><a href="/admin/users?action=edit&id=${user.id}">Edit</a> </td>
-            <td class="pr-2"><a href="/admin/products?action=delete&id=${product.id}" onclick="return confirm('Do you want to remove ${product.name}?')">Delete</a> </td>
+            <td><a href="profile?action=edit&id=${user.id}">Edit</a> </td>
+<%--            <td class="pr-2"><a href="/admin/profile?action=delete&id=${user.id}" onclick="return confirm('Do you want to remove ${user.name}?')">Delete</a> </td>--%>
           </tr>
           </tbody>
-        </c:forEach>
+
       </table>
     </div>
   </div>
   </div>
-</c:if>
-<jsp:include page="./layout/footer.jsp"></jsp:include>
 
+<jsp:include page="./layout/footer.jsp"></jsp:include>

@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("username", user.getUsername());
             if (user.getRole() == Role.ADMIN) {
                 response.sendRedirect("/admin/dashboard");
-                session.setAttribute("user",user);
+//                session.setAttribute("user",user);
                 session.setAttribute("id",user.getId());
             } else if (user.getRole() == Role.USER) {
                 request.getRequestDispatcher("/products").forward(request, response);
@@ -116,16 +116,10 @@ public class LoginServlet extends HttpServlet {
     private void createUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("username");
         String password = req.getParameter("password");
-//        String mail = req.getParameter("mail");
-//        String fullname = req.getParameter("fullname");
-//        String phone = req.getParameter("phone");
-//        String img = req.getParameter("img");
-//        String address = req.getParameter("address");
         User user = new User(name,password,Role.USER);
         userService.createUser(user);
         req.setAttribute("user" , user);
         req.setAttribute("message", "đã đăng ký thành công");
-//        req.setAttribute("createuser", userService.findAll());
         req.getRequestDispatcher("/login/createuser.jsp").forward(req, resp);
 
 

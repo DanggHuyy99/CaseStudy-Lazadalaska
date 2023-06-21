@@ -8,6 +8,23 @@ public class Bill {
     private User user_id;
     private Date date;
     private double total;
+private Status status;
+
+    public Bill(int id, User user_id, Date date, double total, Status status) {
+        this.id = id;
+        this.user_id = user_id;
+        this.date = date;
+        this.total = total;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public Bill() {
     }
@@ -24,6 +41,7 @@ public class Bill {
         this.date = date;
         this.total = total;
     }
+
 
     public int getId() {
         return id;
@@ -56,10 +74,6 @@ public class Bill {
     public void setTotal(double total) {
         this.total = total;
     }
-//    public String getBillTotal(double total) {
-//        String totalNew = CurrencyFormat.covertPriceToString(total);
-//        return totalNew;
-//    }
     public int getMonthFromDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

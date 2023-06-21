@@ -1,10 +1,9 @@
 package controller.adminController;
 import dao.BillDAO;
+import dao.StatusDAO;
 import dto.PageAble;
-import model.Bill;
-import model.BillDetail;
-import model.Product;
-import model.User;
+import model.*;
+import serrvice.StatusService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +18,8 @@ import java.util.List;
 @WebServlet(name = "BillServlet", urlPatterns = "/bill")
 public class BillServlet extends HttpServlet {
     private BillDAO billDAO;
-    private int TOTAL_ITEMS = 5;
+    private int TOTAL_ITEMS = 2;
+    private StatusService statusService = new StatusService();
     @Override
     public void init() throws ServletException {
         billDAO = new BillDAO();

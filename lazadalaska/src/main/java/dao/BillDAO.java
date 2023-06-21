@@ -2,6 +2,7 @@ package dao;
 
 import dto.PageAble;
 import model.Bill;
+import model.Status;
 import model.User;
 
 import java.sql.Connection;
@@ -15,12 +16,15 @@ import java.util.List;
 public class BillDAO extends DatabaseConnection {
 
     private final String CREATE_BILL = "INSERT INTO orders(id, user_id, date, total) VALUES(?,?,?,?)";
-    private final String SELECT_ALL_BILL = "SELECT p.*, c.username as `user_name` FROM lazadalaska.bill p " +
-            "left join user c on p.user_id = c.id where lower(c.id) like '%s' order by %s %s limit %d offset %d ";
-    private final String UPDATE_BILL = "UPDATE `lazadalaska`.`bill` SET `user_id` = ?, `date` = ?, `total` = ? WHERE (`id` = ?)";
+    private final String SELECT_ALL_BILL = "SELECT b.*, u.username AS `user_name`, st.name as `status_name`" +
+            " FROM lazadalaska.bill b LEFT JOIN lazadalaska.user u ON b.user_id = u.id" +
+            " LEFT JOIN lazadalaska.status st ON b.is_bill = st.id " +
+            " WHERE LOWER(u.username) LIKE '%s' ORDER BY %s %s  LIMIT %d OFFSET %d";
+    private final String UPDATE_BILL = "UPDATE `lazadalaska`.`bill` SET `user_id` = ?," +
+            " `date` = ?, `total` = ? `total` = ?  WHERE (`id` = ?)";
     private final String DELETE_BILL = "DELETE FROM orders WHERE id=?";
-    private final String SELECT_BILL_BY_ID = "SELECT p.*, c.username as `user_name` FROM lazadalaska.bill" +
-            " p left join user c on p.user_id = c.id where p.id = ?";
+    private final String SELECT_BILL_BY_ID = "SELECT p.*, c.name as `status_name`" +
+            " FROM lazadalaska.bill p left join status c on p.is_bill = c.id where p.id = ?";
     private final String TOTAL = "SELECT count(1) as `total` FROM lazadalaska.bill p left join user c on p.user_id = c.id where  lower(p.name) like ?";
 
     public List<Bill> findAll(PageAble pageAble) {
@@ -40,7 +44,8 @@ public class BillDAO extends DatabaseConnection {
                 User user = new User(user_id, user_name);
                 Date date = resultSet.getDate("date");
                 double total = resultSet.getDouble("total");
-                bills.add(new Bill(id, user, date, total));
+                String status_name = resultSet.getString("status_name");
+                bills.add(new Bill(id, user, date, total, new Status(status_name)));
             }
             PreparedStatement statement = connection.prepareStatement(TOTAL);
             statement.setString(1, search);
@@ -70,7 +75,10 @@ public class BillDAO extends DatabaseConnection {
                 User user = new User(user_id, user_name);
                 Date date = resultSet.getDate("date");
                 double total = resultSet.getDouble("total");
-                bill = new Bill(id, user, date, total);
+                int status_id = resultSet.getInt("status_id");
+                String status_name = resultSet.getString("status_name");
+                Status status = new Status(status_id, status_name);
+                bill = new Bill(id, user, date, total, status);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -105,4 +113,4 @@ public class BillDAO extends DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
-    }
+}

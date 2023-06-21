@@ -48,11 +48,21 @@
   <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
     <div class="w-full overflow-x-auto">
       <table class="w-full">
+        <thead>
+        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+          <th class="px-4 py-3">IMG</th>
+          <th class="px-4 py-3">Email</th>
+          <th class="px-4 py-3">Full NAME</th>
+          <th class="px-4 py-3">Phone</th>
+          <th class="px-4 py-3">ADDRESS</th>
+          <th class="px-4 py-3">Action</th>
+        </tr>
+        </thead>
         <c:forEach items="${users}" var="user">
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <tr class="text-gray-700 dark:text-gray-400" style="border: 1px solid #d5d6d7">
             <td class="px-4 py-3">
-                ${user.img}
+              <img src="${user.img}">
             </td>
             <td class="px-4 py-3">
                 ${user.email}

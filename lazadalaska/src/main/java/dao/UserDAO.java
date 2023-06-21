@@ -21,7 +21,8 @@ public class UserDAO extends DatabaseConnection {
 
     private final String UPDATE_PASSWORD =  "UPDATE `lazadalaska`.`user` SET  `password` = ? WHERE (`id` = ?)";
     private final String UPDATE_USER = "UPDATE `lazadalaska`.`user` SET `username` = ?, `password` = ?, `email` = ?, `fullname` = ?, `phone` = ? WHERE (`id` = ?)";
-    private final String SELECT_USER_BY_ID = "SELECT p.* FROM lazadalaska.user p where p.id = ?";
+    private final String UPDATE_PROFILE = "UPDATE `lazadalaska`.`user` SET `email` = ?, `fullname` = ?, `phone` = ?, `address` = ?, `img` = ? WHERE (`id` = ?)";
+    private final String SELECT_USER_BY_ID = "SELECT u.* FROM lazadalaska.user u where u.id = ?";
 
     private final String SELECT_USERNAME = "SELECT u.username FROM lazadalaska.user u";
 
@@ -52,7 +53,7 @@ public class UserDAO extends DatabaseConnection {
 
     public boolean updateUser(User user) {
         try {
-            PreparedStatement statement = getConnection().prepareStatement(UPDATE_USER);
+            PreparedStatement statement = getConnection().prepareStatement(UPDATE_PROFILE);
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getFullname());
             statement.setString(3, user.getPhone());
@@ -124,7 +125,9 @@ public class UserDAO extends DatabaseConnection {
                 String phone = resultSet.getString("phone");
                 String address = resultSet.getString("address");
                 String img = resultSet.getString("img");
-                return new User(username,password,email,fullname,phone,address);
+                User user = new User(id,username,password,email,fullname,phone,address,img);
+                return user;
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
