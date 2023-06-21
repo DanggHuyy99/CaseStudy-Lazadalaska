@@ -1,5 +1,6 @@
 package controller;
 
+import model.Role;
 import model.User;
 
 import javax.servlet.ServletException;
@@ -20,28 +21,21 @@ public class CheckOutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
+        Role role = (Role) session.getAttribute("role");
+        if (role == null) {
             req.setAttribute("errors", "Vui lòng đăng nhập để thanh toán!");
             req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
         } else {
-            // tạo trang thanh toán: checkout.jsp
-            //tạo class cart và cartItem để quản lý giỏ hàng
             req.getRequestDispatcher("/Checkout.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
-    @Override
-    public void destroy() {
 
     }
 }

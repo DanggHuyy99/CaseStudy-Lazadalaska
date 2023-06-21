@@ -23,6 +23,7 @@ import java.util.List;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+    PasswordEncode passwordEncode = new PasswordEncode();
     private static final long serialVersionUID = 1L;
 
     private final ProductService productService = new ProductService();
@@ -108,7 +109,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void showCreateuser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setAttribute("user", userService.findAll());
         req.getRequestDispatcher("/login/createuser.jsp")
                 .forward(req, resp);
 
@@ -116,15 +116,13 @@ public class LoginServlet extends HttpServlet {
     private void createUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("username");
         String password = req.getParameter("password");
-        User user = new User(name,password,Role.USER);
+        String enpass = PasswordEncode.encode(password);
+        User user = new User(name,enpass,Role.USER);
         userService.createUser(user);
         req.setAttribute("user" , user);
-        req.setAttribute("message", "đã đăng ký thành công");
+        req.setAttribute("message", "đã đăng ký User thành công");
         req.getRequestDispatcher("/login/createuser.jsp").forward(req, resp);
 
-
-
     }
-
 
 }

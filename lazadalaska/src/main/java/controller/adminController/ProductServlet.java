@@ -20,7 +20,7 @@ import javax.servlet.http.Part;
 import java.io.*;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/handleproduct"})
+@WebServlet(urlPatterns = {"/admin/handleproduct"})
 public class ProductServlet extends HttpServlet {
     private ProductService productService = new ProductService();
 

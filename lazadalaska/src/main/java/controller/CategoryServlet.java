@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CategoryServlet", urlPatterns ="/categories")
+@WebServlet(name = "CategoryServlet", urlPatterns ="/admin/categories")
 public class CategoryServlet extends HttpServlet {
     private ProductService productService = new ProductService();
 
@@ -41,7 +41,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void showCreateCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("categories", categoryService.findAll());
-        req.getRequestDispatcher("category1/createcate.jsp")
+        req.getRequestDispatcher("/category1/createcate.jsp")
                 .forward(req, resp);
     }
 
@@ -49,7 +49,7 @@ public class CategoryServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Category category = categoryService.findById(id);
         req.setAttribute("category", category);
-        req.getRequestDispatcher("category1/editcate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/category1/editcate.jsp").forward(req, resp);
     }
 
 
@@ -79,7 +79,7 @@ public class CategoryServlet extends HttpServlet {
         req.setAttribute("categories", categoryService.findAll());
 
         req.setAttribute("message", "Đã tạo thành công");
-        req.getRequestDispatcher("category1/createcate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/category1/createcate.jsp").forward(req, resp);
 
     }
 
@@ -89,7 +89,7 @@ public class CategoryServlet extends HttpServlet {
         Category category = new Category(id, name);
         categoryService.editCategory(category);
         req.setAttribute("message", "đã sữa thành công ");
-        req.getRequestDispatcher("category1/editcate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/category1/editcate.jsp").forward(req, resp);
 
 
     }
@@ -97,7 +97,7 @@ public class CategoryServlet extends HttpServlet {
         String category = req.getParameter("category");
         List<Product> products = productService.findProductByCategoryName(category);
         req.setAttribute("products", products);
-        req.getRequestDispatcher("home.jsp").forward(req, resp);
+        req.getRequestDispatcher("/home.jsp").forward(req, resp);
     }
 }
 
