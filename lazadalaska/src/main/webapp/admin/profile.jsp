@@ -76,7 +76,7 @@
             <td class="px-4 py-3 text-xs">
                 ${user.address}
             </td>
-            <td><a href="/admin/users?action=edit&id=${user.id}">Edit</a> </td>
+            <td><a href="/admin/users?action=edit&id=${user.id}" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Edit</a> </td>
             <td class="pr-2"><a href="/admin/products?action=delete&id=${product.id}" onclick="return confirm('Do you want to remove ${product.name}?')">Delete</a> </td>
           </tr>
           </tbody>

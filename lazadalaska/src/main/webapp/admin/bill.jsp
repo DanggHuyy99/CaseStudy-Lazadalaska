@@ -1,27 +1,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <jsp:include page="./layout/header.jsp"></jsp:include>
-<style>
-  .pagination {
+
+<style> .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .pages {
+.pages {
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
     padding: 0;
     margin: 0;
-  }
+}
 
-  .pages li {
+.pages li {
     margin-right: 5px;
-  }
+}
 
-  .pages a {
+.pages a {
     display: inline-block;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -29,71 +29,136 @@
     padding: 5px 10px;
     text-decoration: none;
     font-size: 16px;
-  }
+}
 
-  .pages a:hover {
+.pages a:hover {
     background-color: #007bff;
     border-color: #007bff;
     color: #fff;
-  }
+}
 
-  .pages a.active {
+.pages a.active {
     background-color: #007bff;
     border-color: #007bff;
     color: #fff;
-  }
-</style>
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #d5d6d7;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.text-xs {
+    font-size: 12px;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.text-gray-500 {
+    color: #6b7280;
+}
+
+.text-gray-700 {
+    color: #4b5563;
+}
+
+.dark:text-gray-400 {
+    color: #9ca3af;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.border-b {
+    border-bottom-width: 2px;
+}
+
+.dark:border-gray-700 {
+    border-color: #374151;
+}
+
+.bg-gray-50 {
+    background-color: #f9fafb;
+}
+
+.dark:bg-gray-800 {
+    background-color: #1f2937;
+}
+
+.divide-y {
+    border-top-width: 1px;
+    border-color: #d5d6d7;
+}
+
+.dark:divide-gray-700 {
+    border-color: #374151;
+} </style>
 <h1>${action}</h1>
-<form action="bills" method="get">
-  <input type="search" name="search" id="search" value="${pageable.search}" onsearch="onClearSearch()"/>
-  <button id="searchButton">Search</button>
+<form action="bills" method="get"><input type="search" name="search" id="search" value="${pageable.search}"
+                                         onsearch="onClearSearch()"/>
+    <button id="searchButton">Tìm kiếm</button>
 </form>
-<c:if test="${requestScope['products'].size() != 0}">
-  <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
-    <div class="w-full overflow-x-auto">
-      <table class="w-full">
-        <thead>
-        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-          <th class="px-4 py-3">ID</th>
-          <th class="px-4 py-3">Name User</th>
-          <th class="px-4 py-3">Date</th>
-          <th class="px-4 py-3">Total</th>
-          <th class="px-4 py-3">Status</th>
-          <th class="px-4 py-3">Action</th>
-        </tr>
-        </thead>
-        <c:forEach items="${bills}" var="bill">
-          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-          <tr class="text-gray-700 dark:text-gray-400" style="border: 1px solid #d5d6d7">
-            <td class="px-4 py-3">
-                ${bill.id}
-            </td>
-            <td class="px-4 py-3">
-                ${bill.user_id.username}
-            </td>
-            <td class="px-4 py-3 text-sm">
-                ${bill.date}
-            </td>
-            <td class="px-4 py-3 text-xs">
-                ${bill.total}
-            </td>
-            <td class="px-4 py-3 text-xs">
-                ${bill.status.name}
-            </td>
-            <td><button type="submit">Submit</button><td>
-          </tr>
-          </tbody>
-        </c:forEach>
-      </table>
+<c:if test="${not empty bills}">
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
+        <div class="w-full overflow-x-auto">
+            <table>
+                <thead>
+                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th>ID</th>
+                    <th>Tên người dùng</th>
+                    <th>Ngày</th>
+                    <th>Tổng</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+                </thead>
+                <tbody><c:forEach items="${bills}" var="bill">
+                    <tr class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <td>${bill.id}</td>
+                        <td>${bill.user_id.username}</td>
+                        <td class="text-sm">${bill.date}</td>
+                        <td class="text-xs">${bill.total}</td>
+                        <td class="text-xs">${bill.status.name}</td>
+                        <td>
+                            <button type="submit"
+                                    class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ">
+                                SubMit
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit"
+                                    class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ">
+                                Chi Tiết
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach></tbody>
+            </table>
+        </div>
+        <div class="pagination my-8">
+            <ul class="pages"><c:forEach begin="1" end="${pageable.totalPages}" var="page">
+                <li>
+                    <a href="/handleproduct?page=${page}&search=${pageable.search}&sortby=${pageable.sortBy}&nameField=${pageable.nameField}"
+                       class="${page == pageable.page ? 'active' : ''}"> ${page} </a></li>
+            </c:forEach></ul>
+        </div>
     </div>
-    <div class="pagination my-8">
-      <ul class="pages">
-        <c:forEach begin="1" end="${pageable.totalPages}" var="page">
-          <li><a href="/handleproduct?page=${page}&search=${pageable.search}&sortby=${pageable.sortBy}&nameField=${pageable.nameField}">${page}</a></li>
-        </c:forEach>
-      </ul>
-    </div>
-  </div>
-  </div>
 </c:if>
 <jsp:include page="./layout/footer.jsp"></jsp:include>

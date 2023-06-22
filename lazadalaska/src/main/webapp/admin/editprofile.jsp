@@ -46,47 +46,91 @@
     .error {
         color: red;
     }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #d5d6d7;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .submit-button {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6c63ff;
+        color: #fff;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+        background-color: #534edf;
+    }
+
+    .back-button {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6c63ff;
+        color: #fff;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #534edf;
+    }
 </style>
 <c:if test="${requestScope['message'] != null}">
     <span>${message}</span>
 </c:if>
-<form name="myForm" action="/profile?action=edit" method="post" onsubmit="return validateForm()"
-      enctype="multipart/form-data">
+<form name="myForm" action="/profile?action=edit" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
     <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
         <div class="w-full overflow-x-auto">
             <table class="w-full">
-
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                <input type="hidden" name="id"  class="form-control" value="${user.id}">
+                <input type="hidden" name="id" class="form-control" value="${user.id}">
                 <tr class="text-gray-700 dark:text-gray-400" style="border: 1px solid #d5d6d7">
                     <th><label for="img">Image</label></th>
                     <td class="px-4 py-3">
-                    <td><input accept=".png, .gif, .jpeg, .jpg" type="file" name="img" id="img" value="${product.img}"/>
-                    </td>
+                    <td><input accept=".png, .gif, .jpeg, .jpg" type="file" name="img" id="img"
+                               value="${product.img}" class="form-control" /></td>
                 </tr>
                 <tr>
-                    <td><label>Email :</label></td>
+                    <td><label for="email">Email:</label></td>
                     <td class="px-4 py-3">
                         <input type="email" name="email" id="email" class="form-control" value="${user.email}">
                         <span id="emailError" class="error"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Full Name :</label></td>
+                    <td><label for="fullname">Full Name:</label></td>
                     <td class="px-4 py-3">
-                        <input type="text" name="fullname" id="fullname" class="form-control" value="${user.fullname}">
+                        <input type="text" name="fullname" id="fullname" class="form-control"
+                               value="${user.fullname}">
                         <span id="fullnameError" class="error"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Phone Number :</label></td>
+                    <td><label for="phone">Phone Number:</label></td>
                     <td class="px-4 py-3 text-sm">
                         <input type="tel" name="phone" id="phone" class="form-control" value="${user.phone}">
                         <span id="phoneError" class="error"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Address :</label></td>
+                    <td><label for="address">Address:</label></td>
                     <td class="px-4 py-3 text-xs">
                         <textarea name="address" id="address" class="form-control">${user.address}</textarea>
                         <span id="addressError" class="error"></span>
@@ -94,15 +138,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="submit" class="btn btn-primary">
-                            UpLoad Profile
-                        </button>
+                        <button type="submit" class="submit-button">Upload Profile</button>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="submit" class="btn btn-primary">
-                            <a href="/profile?action=myProfile&id=${sessionScope.id}">Back</a></button>
+                        <a href="/profile?action=myProfile&id=${sessionScope.id}" class="back-button">Back</a>
                     </td>
                 </tr>
                 </tbody>
@@ -128,7 +169,7 @@
         phoneError.innerHTML = "";
         addressError.innerHTML = "";
 
-        varisValid = true;
+        var isValid = true;
 
         // Validate Full Name
         if (fullname == "") {

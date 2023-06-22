@@ -74,9 +74,9 @@ public class User {
         this.img = img;
     }
 
-    public User(int id, String password) {
+    public User(int id, String username) {
         this.id = id;
-        this.password = password;
+        this.username = username;
     }
 
     public User(String name, String password) {

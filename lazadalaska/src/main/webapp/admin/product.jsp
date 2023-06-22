@@ -44,7 +44,7 @@
     }
 </style>
                 <h1>${action}</h1>
-                <a href="/handleproduct?action=create">Create Product</a>
+                <a href="/admin/handleproduct?action=create">Create Product</a>
                 <c:if test="${requestScope['products'].size() != 0}">
                 <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
                     <div class="w-full overflow-x-auto">
@@ -85,8 +85,8 @@
                                     <td class="px-4 py-3 text-sm">
                                             ${product.category.name}
                                     </td>
-                                    <td><a href="/handleproduct?action=edit&id=${product.id}">Edit</a> </td>
-                                    <td class="pr-2"><a href="handleproduct?action=delete&id=${product.id}" onclick="return confirm('Do you want to remove ${product.name}?')">Delete</a> </td>
+                                    <td><a href="/handleproduct?action=edit&id=${product.id}" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Edit</a> </td>
+                                    <td class="pr-2"><a href="handleproduct?action=delete&id=${product.id}" onclick="return confirm('Do you want to remove ${product.name}?')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Delete</a> </td>
                                 </tr>
                                 </tbody>
                             </c:forEach>

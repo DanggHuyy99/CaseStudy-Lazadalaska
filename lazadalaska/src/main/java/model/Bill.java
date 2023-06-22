@@ -10,6 +10,8 @@ public class Bill {
     private double total;
 private Status status;
 
+
+
     public Bill(int id, User user_id, Date date, double total, Status status) {
         this.id = id;
         this.user_id = user_id;
@@ -17,6 +19,7 @@ private Status status;
         this.total = total;
         this.status = status;
     }
+
 
     public Status getStatus() {
         return status;
