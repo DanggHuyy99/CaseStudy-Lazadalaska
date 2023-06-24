@@ -13,6 +13,17 @@ public class PageAble {
 
     private String sortBy;
 
+    private String category;
+
+    public PageAble(String search, int page, int totalItems, String nameField, String sortBy, String category) {
+        this.search = search;
+        this.page = page;
+        this.totalItems = totalItems;
+        this.nameField = nameField;
+        this.sortBy = sortBy;
+        this.category = category;
+    }
+
     public PageAble(String search, int page, int totalItems) {
         this.search = search;
         this.page = page;
@@ -32,6 +43,18 @@ public class PageAble {
         this.page = page;
         this.totalItems = totalItems;
         this.totalPages = totalPages;
+    }
+
+    public PageAble() {
+
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getSearch() {

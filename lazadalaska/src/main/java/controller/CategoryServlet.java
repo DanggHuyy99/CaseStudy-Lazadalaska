@@ -1,6 +1,7 @@
 package controller;
 
 
+import dto.PageAble;
 import model.Category;
 import serrvice.CategoryService;
 import model.Product;
@@ -34,7 +35,9 @@ public class CategoryServlet extends HttpServlet {
                 break;
             case "create":
                 showCreateCategory(req, resp);
+
             default:
+                listproduct(req,resp);
         }
 
     }
@@ -93,12 +96,16 @@ public class CategoryServlet extends HttpServlet {
 
 
     }
+
     private void listproduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String category = req.getParameter("category");
-        List<Product> products = productService.findProductByCategoryName(category);
+        List<Product> products = productService.findProductByCategoryName(category, new PageAble());
         req.setAttribute("products", products);
         req.getRequestDispatcher("/home.jsp").forward(req, resp);
     }
+
+
+
 }
 
 

@@ -142,7 +142,7 @@ public class ProfileServlet extends HttpServlet {
                     if (!item.getName().isEmpty() && !item.getFieldName().equals("files")) {
                         String filename = FilenameUtils.getName(item.getName());
                         user.setImg("/assets/img/" + filename);
-                        item.write(new File("D:\\clone\\CaseStudy-Lazadalaska\\lazadalaska\\src\\main\\webapp\\assets\\img\\"
+                        item.write(new File("C:\\NguyenDangHuyy99\\CaseStudy-Lazadalaska\\lazadalaska\\src\\main\\webapp\\assets\\img\\"
                                 + filename));
                     }
                 }

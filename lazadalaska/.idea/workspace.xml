@@ -10,13 +10,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad133fbc-1811-49e2-ab1b-822ae342ae1a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/CategoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/CategoryServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/CheckOutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/CheckOutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProductServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProductServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/adminController/BillServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/adminController/BillServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/adminController/ProductServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/adminController/ProductServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/adminController/ProfileServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/adminController/ProfileServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BillDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/PageAble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/PageAble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/filter/FilterAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/filter/FilterAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/serrvice/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/serrvice/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/bill.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/bill.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/layout/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/headandfoot/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/headandfoot/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/headandfoot/f.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/headandfoot/f.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/headandfoot/h.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/headandfoot/h.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/product/productdetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/product/productdetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/webfonts/fa-regular-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/webfonts/fa-regular-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/webfonts/fa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/webfonts/fa-solid-900.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +50,7 @@
       <list>
         <option value="Enum" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="Jsp File" />
         <option value="Class" />
       </list>
@@ -52,15 +75,24 @@
     </option>
   </component>
   <component name="ProjectId" id="2R5KACY7BjJL1LJPFebybxiKw6F" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/NguyenDangHuyy99/CaseStudy-Lazadalaska/lazadalaska&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\casemd3lazadala\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp" />
@@ -70,6 +102,8 @@
       <recent name="D:\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp\admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\NguyenDangHuyy99\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp\product" />
+      <recent name="C:\NguyenDangHuyy99\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp" />
       <recent name="D:\casemd3lazadala\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp\category1" />
       <recent name="C:\NguyenDangHuyy99\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp\login" />
       <recent name="D:\CaseStudy-Lazadalaska\lazadalaska\src\main\webapp" />
@@ -190,10 +224,27 @@
       <workItem from="1686746892434" duration="3583000" />
       <workItem from="1686791114193" duration="28771000" />
       <workItem from="1686877506338" duration="1598000" />
+      <workItem from="1686968393754" duration="4072000" />
+      <workItem from="1687054109729" duration="10444000" />
+      <workItem from="1687136745037" duration="2886000" />
+      <workItem from="1687139664925" duration="41715000" />
+      <workItem from="1687223380293" duration="25912000" />
+      <workItem from="1687321680667" duration="9223000" />
+      <workItem from="1687353395776" duration="10302000" />
+      <workItem from="1687395795634" duration="11199000" />
+      <workItem from="1687429636896" duration="316000" />
+      <workItem from="1687492789930" duration="648000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.String" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

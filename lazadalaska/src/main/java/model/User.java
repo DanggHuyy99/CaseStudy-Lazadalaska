@@ -18,8 +18,6 @@ public class User {
     private String img;
 
 
-    public User(String username, String password, String email, String fullname, String phone, String address) {
-    }
 
 
     public User() {
@@ -31,7 +29,10 @@ public class User {
         this.role = role;
     }
 
-    public User(int id, String username, String password, String email, String fullname, String phone, Role role, String address, String img) {
+
+
+
+    public User(int id, String username, String password, String email, String fullname, String phone, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -84,6 +85,17 @@ public class User {
         this.password = password;
     }
 
+    public User(int id, String username, String password, String email, String fullname, String phone, Role role, String address, String img) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+        this.img = img;
+    }
 
     public int getId() {
         return id;

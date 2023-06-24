@@ -38,6 +38,8 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/page.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-rHoG5h2gUFe90z93Hc3K6OaV3WZDv9Kx7qLhGjSfuY3fPTTF6G/y32InWtzS2C7n" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="sweetalert2.min.css">
 
   <!--===============================================================================================-->
   <style>
@@ -84,6 +86,100 @@
       color: #333;
       cursor: not-allowed;
     }
+    .header-cart-item-remove {
+      display: none; /* Ẩn nút remove ban đầu */
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      font-size: 14px;
+      transition: color 0.3s ease-in-out;
+      border-radius: 50%;
+      padding: 5px;
+      outline: none;
+    }
+
+    .header-cart-item:hover .header-cart-item-remove {
+      display: inline-block; /* Hiển thị nút remove khi hover vào sản phẩm */
+      color: #ff5e15;
+      background-color: #f8f8f8; /* Màu nền khi hover vào nút remove */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hiệu ứng chuyển động khi hiển thị nút remove */
+    .header-cart-item-remove {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .header-cart-item:hover .header-cart-item-remove {
+      opacity: 1;
+    }
+    .icon-header-noti {
+      position: relative;
+    }
+
+    .icon-header-noti::after {
+      content: attr(data-notify);
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      animation: colorChange 3s infinite linear, scaleChange 3s infinite alternate;
+      background: linear-gradient(45deg, #ff3366, #ff9933, #ffff33, #33cc33, #3366ff, #9933ff, #ff33cc, #ff3366);
+      background-size: 800% 800%;
+    }
+
+    @keyframes colorChange {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+    @keyframes scaleChange {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .icon-header-noti:hover::after {
+      background-color: #cc0033;
+    }
+
+    .icon-header-noti::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 16px;
+      height: 16px;
+      background-color: #fff;
+      border-radius: 50%;
+      z-index: 0;
+      opacity: 0.4;
+      transition: all 0.3s ease;
+    }
+
+    .icon-header-noti:hover::before {
+      opacity: 0.6;
+    }
+
+    /*.editanh{*/
+    /*  height: 100%; !important;*/
+    /*}*/
   </style>
 </head>
 <body class="animsition">
@@ -133,12 +229,28 @@
           <ul class="main-menu">
             <li class="active-menu">
               <a href="products">Home</a>
-              <ul class="sub-menu">
-                <li><a href="index.html">Homepage 1</a></li>
-                <li><a href="home-02.html">Homepage 2</a></li>
-                <li><a href="home-03.html">Homepage 3</a></li>
-              </ul>
+<%--              <ul class="sub-menu">--%>
+<%--                <li><a href="index.html">Homepage 1</a></li>--%>
+<%--                <li><a href="home-02.html">Homepage 2</a></li>--%>
+<%--                <li><a href="home-03.html">Homepage 3</a></li>--%>
+<%--              </ul>--%>
             </li>
+
+<%--            <li>--%>
+<%--              <a href="product.html">Shop</a>--%>
+<%--            </li>--%>
+
+<%--            <li class="label1" data-label1="hot">--%>
+<%--              <a href="shoping-cart.html">Features</a>--%>
+<%--            </li>--%>
+
+<%--            <li>--%>
+<%--              <a href="blog.html">Blog</a>--%>
+<%--            </li>--%>
+
+<%--            <li>--%>
+<%--              <a href="about.html">About</a>--%>
+<%--            </li>--%>
 
             <li>
               <a href="product.html">Shop</a>
@@ -157,13 +269,18 @@
             </li>
             <li>
 
-              <c:if test="${sessionScope.username != null}">
-                <a class="mr-2" href="">Hello <%=session.getAttribute("username")%></a>
-                <a href="/products?action=logout">log out</a>
-              </c:if>
-              <c:if test="${sessionScope.username == null}">
-                <a href="/login?action=login">Log in</a>
-              </c:if>
+                <c:if test="${sessionScope.username != null}">
+                    <a class="mr-2" href="">Hello <%=session.getAttribute("username")%></a>
+                    <script>
+                        var username = '<%=session.getAttribute("username")%>';
+                        sessionStorage.setItem('username', username);
+                    </script>
+                    <a href="/products?action=logout" onclick="logout()">log out</a>
+                </c:if>
+                <c:if test="${sessionScope.username == null}">
+                    <a href="/login?action=login">Log in</a>
+
+                </c:if>
             </li>
           </ul>
         </div>
@@ -178,9 +295,9 @@
             <i class="zmdi zmdi-shopping-cart"></i>
           </div>
 
-          <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-            <i class="zmdi zmdi-favorite-outline"></i>
-          </a>
+<%--          <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">--%>
+<%--            <i class="zmdi zmdi-favorite-outline"></i>--%>
+<%--          </a>--%>
         </div>
       </nav>
     </div>
@@ -252,15 +369,15 @@
 
     <ul class="main-menu-m">
       <li>
-        <a href="index.html">Home</a>
-        <ul class="sub-menu-m">
-          <li><a href="index.html">Homepage 1</a></li>
-          <li><a href="home-02.html">Homepage 2</a></li>
-          <li><a href="home-03.html">Homepage 3</a></li>
-        </ul>
-        <span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
+        <a href="/products">Home</a>
+<%--        <ul class="sub-menu-m">--%>
+<%--          <li><a href="index.html">Homepage 1</a></li>--%>
+<%--          <li><a href="home-02.html">Homepage 2</a></li>--%>
+<%--          <li><a href="home-03.html">Homepage 3</a></li>--%>
+<%--        </ul>--%>
+<%--        <span class="arrow-main-menu-m">--%>
+<%--						<i class="fa fa-angle-right" aria-hidden="true"></i>--%>
+<%--					</span>--%>
       </li>
 
       <li>
@@ -317,7 +434,7 @@
       </div>
     </div>
 
-    <div class="header-cart-content flex-w js-pscroll">
+    <div class="header-cart-content flex-w js-pscroll" style="display: flex">
       <ul class="header-cart-wrapitem w-full" id="cart-items">
         <li class="header-cart-item flex-w flex-t m-b-12">
 <%--          <div class="header-cart-item-img">--%>
@@ -373,13 +490,9 @@
           Total:
         </div>
 
-        <div class="header-cart-buttons flex-w w-full">
-          <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+        <div class="header-cart-buttons flex-w w-full" style="justify-content: center">
+          <a href="/products?action=shoppingCart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
             View Cart
-          </a>
-
-          <a href="/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" onclick="return confirm('Vui lòng đăng nhập để thanh toán?')" >
-            Check Out
           </a>
         </div>
       </div>
@@ -477,16 +590,16 @@
         <!-- Block1 -->
         <div class="block1 wrap-pic-w">
 
-          <img src="<c:url value="/images/banner-01.jpg"></c:url>" alt="IMG-BANNER">
+          <img src="https://images.hdqwalls.com/wallpapers/fashion-model-4k-9k.jpg" alt="IMG-BANNER">
 
-          <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+          <a href="/products?category=fashion" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
             <div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Women
+									Fashion
 								</span>
 
               <span class="block1-info stext-102 trans-04">
-									Spring 2018
+									Hot 2023
 								</span>
             </div>
 
@@ -502,16 +615,16 @@
       <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
         <!-- Block1 -->
         <div class="block1 wrap-pic-w">
-          <img src="../images/banner-02.jpg" alt="IMG-BANNER">
+          <img src="https://www.wallpapers4u.org/wp-content/uploads/make-up_cosmetics_face_smile_82542_1920x1080.jpg" class="editanh" style="height: 255px" alt="IMG-BANNER">
 
-          <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+          <a href="/products?category=cosmetics" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
             <div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Men
+									Cosmectics
 								</span>
 
               <span class="block1-info stext-102 trans-04">
-									Spring 2018
+									Hot Model
 								</span>
             </div>
 
@@ -526,17 +639,17 @@
 
       <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
         <!-- Block1 -->
-        <div class="block1 wrap-pic-w">
-          <img src="../images/banner-03.jpg" alt="IMG-BANNER">
+        <div class="block1 wrap-pic-w" >
+          <img src="https://wallpapercave.com/wp/wp9225784.jpg" class="editanh" style="height: 255px" alt="IMG-BANNER">
 
-          <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+          <a href="/products?category=technological" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
             <div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Accessories
+									Technological
 								</span>
 
               <span class="block1-info stext-102 trans-04">
-									New Trend
+									New World
 								</span>
             </div>
 
@@ -570,19 +683,19 @@
         </button>
         </a>
 
-        <a href="/category?category=fashion">
+          <a href="/products?category=fashion">
           <button name="category" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
             Fashion
           </button>
         </a>
 
-        <a href="/category?category=cosmetics">
+        <a href="/products?category=cosmetics">
         <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
           Cosmetics
         </button>
         </a>
 
-        <a href="/category?category=technological">
+        <a href="/products?category=technological">
         <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
           Technological
         </button>
@@ -645,7 +758,7 @@
 
             <ul>
               <li class="p-b-6">
-                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=id" class="filter-link stext-106 trans-04">
+                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=id&category=${pageable.category}" class="filter-link stext-106 trans-04">
                   Default
                 </a>
 <%--                <a href="#" class="filter-link stext-106 trans-04">--%>
@@ -654,13 +767,13 @@
               </li>
 
               <li class="p-b-6">
-                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=name" class="filter-link stext-106 trans-04">
+                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=name&category=${pageable.category}" class="filter-link stext-106 trans-04">
                   Name
                 </a>
               </li>
 
               <li class="p-b-6">
-                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=category_name" class="filter-link stext-106 trans-04">
+                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=category_name&category=${pageable.category}" class="filter-link stext-106 trans-04">
                   Category
                 </a>
               </li>
@@ -672,13 +785,13 @@
 <%--              </li>--%>
 
               <li class="p-b-6">
-                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=price" class="filter-link stext-106 trans-04">
+                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=price&category=${pageable.category}" class="filter-link stext-106 trans-04">
                   Price: Low to High
                 </a>
               </li>
 
               <li class="p-b-6">
-                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=price" class="filter-link stext-106 trans-04">
+                <a href="/products?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=price&category=${pageable.category}" class="filter-link stext-106 trans-04">
                   Price: High to Low
                 </a>
               </li>
@@ -834,7 +947,7 @@
     <!-- Block2 -->
     <div class="block2">
       <div class="block2-pic hov-img0">
-        <a href="/product/productdetail.jsp">
+        <a href="/products?action=productdetail&id=${product.id}">
           <img src="${product.img}" >
         </a>
 
@@ -845,7 +958,7 @@
 
       <div class="block2-txt flex-w flex-t p-t-14">
         <div class="block2-txt-child1 flex-col-l ">
-          <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" class="product-name">
+          <a href="/products?action=productdetail&id=${product.id}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" class="product-name">
             ${product.name}
           </a>
           <span class="stext-105 cl3">

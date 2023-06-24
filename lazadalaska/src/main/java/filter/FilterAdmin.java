@@ -26,9 +26,6 @@ public class FilterAdmin implements Filter{
             httpServletResponse.sendRedirect("/products");
             return;
         }
-        //bo qua
         chain.doFilter(request, response);
-
-
     }
 }

@@ -34,7 +34,7 @@ public class ProductService {
         return productDAO.findByUsername(username);
     }
 
-    public List<Product> findProductByCategoryName(String name){
-        return productDAO.findProductByCategoryName(name);
+    public List<Product> findProductByCategoryName(String name,PageAble pageAble){
+        return productDAO.findProductByCategoryName(name,pageAble);
     }
 }

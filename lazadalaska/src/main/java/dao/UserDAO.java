@@ -1,31 +1,23 @@
 package dao;
-
 import model.Role;
 import model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 public class UserDAO extends DatabaseConnection {
     private final String SELECT_USER = "SELECT * FROM user";
     private final String CREATE_USER = "INSERT INTO `lazadalaska`.`user` (`username`, `password`, `email`, `fullname`, `phone`, `role`) VALUES (?, ?, ?, ?, ?, ?)";
-
     private final String UPDATE_PASSWORD =  "UPDATE `lazadalaska`.`user` SET  `password` = ? WHERE (`id` = ?)";
     private final String UPDATE_USER = "UPDATE `lazadalaska`.`user` SET `username` = ?, `password` = ?, `email` = ?, `fullname` = ?, `phone` = ? WHERE (`id` = ?)";
     private final String UPDATE_PROFILE = "UPDATE `lazadalaska`.`user` SET `email` = ?, `fullname` = ?, `phone` = ?, `address` = ?, `img` = ? WHERE (`id` = ?)";
     private final String SELECT_USER_BY_ID = "SELECT u.* FROM lazadalaska.user u where u.id = ?";
-
     private final String SELECT_USERNAME = "SELECT u.username FROM lazadalaska.user u";
-
     public ArrayList<User> findAll() {
         ArrayList<User> userList = new ArrayList<>();
         try {
@@ -49,8 +41,6 @@ public class UserDAO extends DatabaseConnection {
         }
         return userList;
     }
-
-
     public boolean updateUser(User user) {
         try {
             PreparedStatement statement = getConnection().prepareStatement(UPDATE_PROFILE);
@@ -69,7 +59,6 @@ public class UserDAO extends DatabaseConnection {
         }
         return false;
     }
-
     public ArrayList<String> getAllUsernames() {
         ArrayList<String> usernameList = new ArrayList<>();
         try {
@@ -83,12 +72,10 @@ public class UserDAO extends DatabaseConnection {
         }
         return usernameList;
     }
-
     public boolean isUsernameExist(String username) {
         String query = SELECT_USERNAME + " WHERE u.username = ?";
         try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query)) {
             statement.setString(1, username);
-
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {
@@ -127,14 +114,12 @@ public class UserDAO extends DatabaseConnection {
                 String img = resultSet.getString("img");
                 User user = new User(id,username,password,email,fullname,phone,address,img);
                 return user;
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
-
     public void createUser(User user){
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER )) {
@@ -150,6 +135,18 @@ public class UserDAO extends DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

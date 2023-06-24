@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./layout/header.jsp"></jsp:include>
 
 <style> .pagination {
@@ -110,10 +111,6 @@ th {
     border-color: #374151;
 } </style>
 <h1>${action}</h1>
-<form action="bills" method="get"><input type="search" name="search" id="search" value="${pageable.search}"
-                                         onsearch="onClearSearch()"/>
-    <button id="searchButton">Tìm kiếm</button>
-</form>
 <c:if test="${not empty bills}">
 
     <div class="w-full overflow-hidden rounded-lg shadow-xs p-2">
@@ -134,18 +131,12 @@ th {
                         <td>${bill.id}</td>
                         <td>${bill.user_id.username}</td>
                         <td class="text-sm">${bill.date}</td>
-                        <td class="text-xs">${bill.total}</td>
+                        <td class="text-xs"><fmt:formatNumber value="${bill.total}" type="currency" currencyCode="VND"/></td>
                         <td class="text-xs">${bill.status.name}</td>
                         <td>
-                            <button type="submit"
+                            <button type="button" onclick="submitBill(${bill.id})"
                                     class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ">
                                 SubMit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="submit"
-                                    class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ">
-                                Chi Tiết
                             </button>
                         </td>
                     </tr>
@@ -162,3 +153,20 @@ th {
     </div>
 </c:if>
 <jsp:include page="./layout/footer.jsp"></jsp:include>
+<script>
+    function submitBill(billId) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "confirmBillServlet");
+
+        var input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "billId");
+        input.setAttribute("value", billId);
+
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>

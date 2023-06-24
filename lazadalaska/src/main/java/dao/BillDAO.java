@@ -27,6 +27,9 @@ public class BillDAO extends DatabaseConnection {
             " FROM lazadalaska.bill p left join status c on p.is_bill = c.id where p.id = ?";
     private final String TOTAL = "SELECT count(1) as `total` FROM lazadalaska.bill p left join user c on p.user_id = c.id where  lower(p.name) like ?";
 
+    private final String SELECT_ALL_BILLS = "SELECT b.id, b.user_id, b.date, b.total, s.name as `status_name` FROM lazadalaska.bill b left join status s on b.is_bill = s.id";
+
+    private final String CONFIRM_BILL = "UPDATE `lazadalaska`.`bill` SET `is_bill` = 2 WHERE (`id` = ?)";
     public List<Bill> findAll(PageAble pageAble) {
         String search = pageAble.getSearch();
         if (search == null) search = "";
@@ -111,6 +114,20 @@ public class BillDAO extends DatabaseConnection {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void confirmBill(int id){
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(CONFIRM_BILL);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

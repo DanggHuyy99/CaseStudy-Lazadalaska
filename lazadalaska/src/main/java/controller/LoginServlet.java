@@ -35,6 +35,9 @@ public class LoginServlet extends HttpServlet {
                 .forward(req, resp);
     }
 
+    @Override
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -65,16 +68,21 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (PasswordEncode.check(password, user.getPassword())) {
-
             session.setAttribute("role", user.getRole());
+            session.setAttribute("user", user);
             session.setAttribute("username", user.getUsername());
+
+
             request.setAttribute("username", user.getUsername());
             if (user.getRole() == Role.ADMIN) {
                 response.sendRedirect("/admin/dashboard");
 //                session.setAttribute("user",user);
                 session.setAttribute("id",user.getId());
             } else if (user.getRole() == Role.USER) {
-                request.getRequestDispatcher("/products").forward(request, response);
+
+                response.sendRedirect("/products");
+//                response.sendRedirect("/home.jsp");
+
             }
         } else {
             request.setAttribute("errors", "Mật khẩu sai");

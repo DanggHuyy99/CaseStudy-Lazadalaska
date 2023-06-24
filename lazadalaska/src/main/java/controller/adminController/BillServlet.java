@@ -18,7 +18,7 @@ import java.util.List;
 @WebServlet(name = "BillServlet", urlPatterns = "/bill")
 public class BillServlet extends HttpServlet {
     private BillDAO billDAO;
-    private int TOTAL_ITEMS = 2;
+    private int TOTAL_ITEMS = 100;
     private StatusService statusService = new StatusService();
     @Override
     public void init() throws ServletException {

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./layout/header.jsp"></jsp:include>
 <head>
     <title>Edit Product</title>
@@ -168,3 +169,8 @@
 </form>
 </body>
 <jsp:include page="./layout/footer.jsp"></jsp:include>
+<script>
+    var priceElement = document.getElementById("price");
+    var formattedPrice = parseFloat(priceElement.value).toFixed(2);
+    priceElement.value = formattedPrice;
+</script>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./layout/header.jsp"></jsp:include>
 <style>
     .pagination {
@@ -70,9 +71,8 @@
                                     <td class="px-4 py-3">
                                             ${product.name}
                                     </td>
-                                    <td class="px-4 py-3 text-sm">
-                                            ${product.price}
-                                    </td>
+                                    <td class="text-xs" style="white-space: nowrap"><fmt:formatNumber value="${product.price}" type="currency" currencyCode="VND"/></td>
+
                                     <td class="px-4 py-3 text-xs">
                                             ${product.describe}
                                     </td>

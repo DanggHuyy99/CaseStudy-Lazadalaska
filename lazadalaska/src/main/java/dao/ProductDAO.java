@@ -18,8 +18,11 @@ public class ProductDAO extends DatabaseConnection {
     private final String CREATE_PRODUCT = "INSERT INTO `lazadalaska`.`product` (`name`, `price`, `describe`, `quantity`, `img`, `category_id`) VALUES (?, ?, ?, ?, ?, ?)";
     private final String UPDATE_PRODUCT = "UPDATE `lazadalaska`.`product` SET `name` = ?, `price` = ?, `describe` = ?, `quantity` = ?, `img` = ?, `category_id` = ? WHERE (`id` = ?)";
     private final String DELETE_PRODUCT = "DELETE FROM `lazadalaska`.`product` WHERE (`id` = ?)";
-    private final String SELECT_BY_USERNAME = "SELECT * FROM user where username = ?;";
-    private final String SELECT_PRODUCT_BY_CATEGORY = "SELECT p.*, c.name as `category_name` FROM lazadalaska.product p left join category c on p.category_id = c.id where c.name = ?";
+
+    private final String SELECT_BY_USERNAME = "SELECT * FROM user where username = ?";
+
+    private final String SELECT_PRODUCT_BY_CATEGORY2 = "SELECT p.*, c.name as `category_name` FROM lazadalaska.product p left join category c on p.category_id = c.id where c.name = '%s' and (lower(p.name) like '%s' or lower(p.describe) like '%s' or lower(c.name) like '%s') order by %s %s limit %d offset %d ";
+
     public List<Product> findAll(PageAble pageAble) {
         String search = pageAble.getSearch();
         if (search == null) search = "";
@@ -144,12 +147,20 @@ public class ProductDAO extends DatabaseConnection {
         }
         return null;
     }
-    public List<Product> findProductByCategoryName(String name){
+    public List<Product> findProductByCategoryName(String name,PageAble pageAble){
         List<Product> products = new ArrayList<>();
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_CATEGORY);
-            preparedStatement.setString(1, name);
+//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_CATEGORY);
+            String search = pageAble.getSearch();
+            if (search == null) search = "";
+            search = "%" + search + "%";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(String.format(SELECT_PRODUCT_BY_CATEGORY2,pageAble.getCategory(),
+                    search, search, search, pageAble.getNameField(),
+                    pageAble.getSortBy(), pageAble.getTotalItems(), (pageAble.getPage() - 1) * pageAble.getTotalItems()));
+            System.out.println(preparedStatement);
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int id = resultSet.getInt("id");

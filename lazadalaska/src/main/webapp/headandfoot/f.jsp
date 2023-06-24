@@ -182,41 +182,41 @@
                 <div class="col-md-6 col-lg-7 p-b-30">
                     <div class="p-l-25 p-r-30 p-lr-0-lg">
                         <div class="wrap-slick3 flex-sb flex-w">
-                            <div class="wrap-slick3-dots"></div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+<%--                            <div class="wrap-slick3-dots"></div>--%>
+<%--                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>--%>
 
                             <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+<%--                                <div class="item-slick3">--%>
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="${product.img}" alt="IMG-PRODUCT" id="imgProduct">
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                           href="images/product-detail-01.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+<%--                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"--%>
+<%--                                           href="${product.img}">--%>
+<%--                                            <i class="fa fa-expand"></i>--%>
+<%--                                        </a>--%>
                                     </div>
-                                </div>
+<%--                                </div>--%>
 
-                                <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+<%--                                <div class="item-slick3" data-thumb="images/product-detail-02.jpg">--%>
+<%--                                    <div class="wrap-pic-w pos-relative">--%>
+<%--                                        <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">--%>
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                           href="images/product-detail-02.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+<%--                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"--%>
+<%--                                           href="images/product-detail-02.jpg">--%>
+<%--                                            <i class="fa fa-expand"></i>--%>
+<%--                                        </a>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
-                                <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+<%--                                <div class="item-slick3" data-thumb="images/product-detail-03.jpg">--%>
+<%--                                    <div class="wrap-pic-w pos-relative">--%>
+<%--                                        <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">--%>
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                           href="images/product-detail-03.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+<%--                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"--%>
+<%--                                           href="images/product-detail-03.jpg">--%>
+<%--                                            <i class="fa fa-expand"></i>--%>
+<%--                                        </a>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                     </div>
@@ -224,6 +224,9 @@
 
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
+                        <h3 id="idProduct" style="display: none">
+                            ${product.id}
+                        </h3>
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="nameProduct" class="product-name">
                             ${product.name}
                         </h4>
@@ -233,74 +236,78 @@
                         <%--								${formattedPrice}--%>
                         <%--							</span>--%>
                         <span class="mtext-106 cl2 product-price" data-price="${product.price}" id="priceProduct">
-    <fmt:formatNumber value="${product.price}" pattern="#,##0.00"  var="formattedPrice" />
+    <fmt:formatNumber value="${product.price}" pattern="#,##0.00" var="formattedPrice"/>
     ${formattedPrice}
 </span>
-
+                        <p class="stext-102 cl3 p-t-23" id="quantityProduct">
+                            ${product.quantity}
+                        </p>
                         <p class="stext-102 cl3 p-t-23" id="describeProduct">
                             ${product.describe}
                         </p>
 
                         <!--  -->
                         <div class="p-t-33">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Size
-                                </div>
+<%--                            <div class="flex-w flex-r-m p-b-10">--%>
+<%--                                <div class="size-203 flex-c-m respon6">--%>
+<%--                                    Size--%>
+<%--                                </div>--%>
 
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                                <div class="size-204 respon6-next">--%>
+<%--                                    <div class="rs1-select2 bor8 bg0">--%>
+<%--                                        <select class="js-select2" name="time">--%>
+<%--                                            <option>Choose an option</option>--%>
+<%--                                            <option>Size S</option>--%>
+<%--                                            <option>Size M</option>--%>
+<%--                                            <option>Size L</option>--%>
+<%--                                            <option>Size XL</option>--%>
+<%--                                        </select>--%>
+<%--                                        <div class="dropDownSelect2"></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Color
-                                </div>
+<%--                            <div class="flex-w flex-r-m p-b-10">--%>
+<%--                                <div class="size-203 flex-c-m respon6">--%>
+<%--                                    Color--%>
+<%--                                </div>--%>
 
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                                <div class="size-204 respon6-next">--%>
+<%--                                    <div class="rs1-select2 bor8 bg0">--%>
+<%--                                        <select class="js-select2" name="time">--%>
+<%--                                            <option>Choose an option</option>--%>
+<%--                                            <option>Red</option>--%>
+<%--                                            <option>Blue</option>--%>
+<%--                                            <option>White</option>--%>
+<%--                                            <option>Grey</option>--%>
+<%--                                        </select>--%>
+<%--                                        <div class="dropDownSelect2"></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-204 flex-w flex-m respon6-next">
                                     <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+
                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                               name="num-product" value="1">
+                                        <input class="quantity-input mtext-104 cl3 txt-center num-product" type="number"
+                                               name="num-product" id="quantityInput" value="1">
 
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                        <div class="btn-num-product-up cl8 hov-b tn3 trans-04 flex-c-m"
+                                             id="btn-num-product-up">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
 
-                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
-                                    </button>
+<%--                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">--%>
+<%--                                        Add to cart--%>
+<%--                                    </button>--%>
                                     <button class="add-to-cart-btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart hihihihi
+                                        Add to cart
                                     </button>
                                 </div>
                             </div>
@@ -384,7 +391,8 @@
 <script src="vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
 <script src="vendor/sweetalert/sweetalert.min.js"></script>
-<script src="/headandfoot/app.js"></script>
+<script src="headandfoot/app.js"></script>
+<script src="headandfoot/new.js"></script>
 
 
 <%--<c:set var="cartTotal"  value="0"></c:set>--%>
@@ -421,79 +429,131 @@
     /*---------------------------------------------*/
 
     $('.js-addcart-detail').on('click', function () {
-        var nameProduct = $(this).closest('.p-r-50').find('.js-name-detail').text();
-        console.log(nameProduct);
-        var priceProduct = $('#productPrice').data('price');
-        console.log(priceProduct);
-        let imgProduct1 = $('#imgProduct').attr('src');
-        console.log(imgProduct1);
-
-        const priceString = document.getElementById("priceProduct").innerHTML;
-        const price = parseInt(priceString.replace(/[^\d]/g, ""));
-        const formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-
-        // let b = 5;
-        // console.log(`hello \${b}`);
-
-        swal(nameProduct + " with price is " + formattedPrice, "is added to cart!", "success");
-
-        let cart = updateCartHtml(imgProduct1, nameProduct, formattedPrice);
-        console.log(cart)
-        $('#cart-items').append(cart);
-
-        cartTotal += parseFloat(formattedPrice.replace(/\./g, '').replace(',', '.'));
-
-
         var currentCart = JSON.parse(localStorage.getItem("cart"));
-        if(!currentCart) currentCart = [];
-        var product = {
-            name: nameProduct,
-            price: formattedPrice,
-            img: imgProduct1
-        };
-        currentCart.push(product);
-        let tongtien = 0;
+        if (!currentCart) currentCart = [];
+        // Lấy ra các giá trị
+        var nameProduct = $(this).closest('.p-r-50').find('.js-name-detail').text();
+        productId = document.getElementById("idProduct").textContent.trim();
+        console.log(productId + "hhhh")
+        // var priceProduct = $('#productPrice').data('price');
 
-        for (const cart of currentCart) {
-            tongtien+= convertFormattedPriceToNumber(cart.price);
+        var imgProduct1 = $('#imgProduct').attr('src');
+        var quantity = parseInt($('.quantity-input').val());
+        var defaultQuantity = parseInt(document.getElementById("quantityProduct").textContent.trim());
+        var product = currentCart.find(e => e.name === nameProduct);
+        console.log(product?.quantity || 0)
+        // Validate số lượng
+        if (quantity + (product?.quantity || 0) > defaultQuantity) {
+            swal("Error", "Quantity selected exceeds the available quantity", "error");
+            return;
         }
 
+        // Xử lý format price
+        const priceString = document.getElementById("priceProduct").innerHTML;
+        const costProduct = (parseInt(priceString.replace(/[^\d]/g, ""))).toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+        console.log(priceString)
+        const price = quantity * parseInt(priceString.replace(/[^\d]/g, ""));
+        const formattedPrice = price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
 
-        $('.header-cart-total').text('Total: ' + formatPrice(tongtien));
+        // Thông báo thêm vào giỏ hàng thành công
+        swal(nameProduct + " with price is " + formattedPrice, "is added to cart!", "success");
 
+        // Lưu vào localstoere
+        var product = currentCart.find(e => e.id === productId);
+        if (product) {
+            product.quantity += quantity;
+            var totalPrice = +(quantity * convertFormattedPriceToNumber(costProduct)) + +convertFormattedPriceToNumber(product.price);
+            product.price = totalPrice.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+        } else {
+            product = {
+                id: productId,
+                name: nameProduct,
+                price: formattedPrice,
+                img: imgProduct1,
+                quantity: quantity,
+                cost: costProduct,
+                maxQuantity: defaultQuantity
+            };
+            currentCart.push(product);
+        }
         localStorage.setItem("cart", JSON.stringify(currentCart));
 
+        // Câpj nhập lại giỏ hàng
+        updateCartDisplay();
+        updateCartNotify();
+    });
+
+    function updateCartDisplay() {
+        var cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        $('#cart-items').empty();
+        let tongTien = 0;
+        for (const cart of cartItems) {
+            tongTien += convertFormattedPriceToNumber(cart.price);
+            var cartItem = updateCartHtml2(cart.id, cart.img, cart.name, cart.price, cart.quantity, cart.cost);
+            $('#cart-items').append(cartItem);
+        }
+        $('.header-cart-total').text('Total: ' + formatPrice(tongTien));
+
+    }
+
+    function confirmRemove(id) {
+        if (confirm("Do you want to remove product from your cart?")) {
+            removeProduct(id);
+        }
+    }
+    function removeProduct(id) {
+        var cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Lọc ra sản phẩm cần xóa khỏi giỏ hàng
+        var updatedItems = cartItems.filter(function(item) {
+            return item.id != id;
+        });
+        console.log(id)
+
+
+        localStorage.setItem("cart", JSON.stringify(updatedItems));
 
         updateCartDisplay();
-    });
-    function formatPrice(price) {
-        // Sử dụng hàm toLocaleString() để định dạng giá trị tiền tệ
-        return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        updateCartNotify();
     }
+
+    function formatPrice(price) {
+        return price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+    }
+
     function convertFormattedPriceToNumber(formattedPrice) {
-        // Remove any non-digit characters from the string
         const numericString = formattedPrice.replace(/[^\d]/g, '');
-
-        // Parse the numeric string as an integer
         const numericValue = parseInt(numericString, 10);
-
         return numericValue;
     }
 
-    function updateCartDisplay() {
-        var cartItems = JSON.parse(localStorage.getItem("cart"));
 
-        $('#cart-items').empty();
-
-        cartItems.forEach(function (item) {
-            var cartItem = updateCartHtml(item.img, item.name, item.price);
-            $('#cart-items').append(cartItem);
-        });
-    }
+    // function updateCartDisplay(callback) {
+    //     var cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    //
+    //     $('#cart-items').empty();
+    //     let totalCart;
+    //
+    //     cartItems.forEach(function (item) {
+    //         var cartItem = updateCartHtml(item.img, item.name, formatPrice(item.price));
+    //         // console.log(item.price)
+    //         // console.log(convertFormattedPriceToNumber(item.price))
+    //         totalCart += convertFormattedPriceToNumber(item.price);
+    //         $('#cart-items').append(cartItem);
+    //     });
+    //     // console.log(totalCart)
+    //     // console.log(formatPrice(totalCart))
+    //     // document.getElementById('cartTotal').innerHTML = formatPrice(totalCart)
+    //     if (callback) {
+    //         callback();
+    //     }
+    // }
     $(document).ready(function () {
         updateCartDisplay();
     });
 </script>
+
 
 
 <!--===============================================================================================-->
@@ -542,12 +602,14 @@
 
 <script>
     function onClickQuickView(id) {
+        document.getElementById('quantityInput').value = 1
         const product = productsDefault.find(e => e.id === id);
         nameProduct.innerHTML = product.name;
         describeProduct.innerHTML = product.describe;
         imgProduct.src = product.img;
-        priceProduct.innerHTML = product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-
+        priceProduct.innerHTML = product.price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+        quantityProduct.innerHTML = product.quantity;
+        idProduct.innerHTML = product.id;
 
     }
 
@@ -562,6 +624,8 @@
     function addToCart() {
         const productName = document.querySelector('.product-name').textContent;
         const productPrice = document.querySelector('.product-price').textContent;
+        updateCartNotify();
+
 
         const cartItem = document.createElement('li');
         cartItem.classList.add('header-cart-item', 'flex-w', 'flex-t', 'm-b-12');
@@ -574,6 +638,34 @@
 
         cartItems.appendChild(cartItem);
     }
+
+    function updateCartNotify() {
+        var cartNotify = document.querySelector('.js-show-cart');
+        if (cartNotify) {
+            var cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            var cartSize = cartItems.length;
+            cartNotify.setAttribute('data-notify', cartSize);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartNotify();
+    });
+</script>
+<script>
+    let plusBtn = document.getElementById('btn-num-product-up');
+
+    plusBtn.addEventListener('click', function () {
+        var quantity = parseInt(document.querySelector('.quantity-input').value);
+        console.log(quantity)
+        var defaultQuantity = parseInt(document.getElementById("quantityProduct").textContent.trim());
+
+        if (quantity > defaultQuantity) {
+            swal("Quantity", "Value: " + quantity, "info");
+            quantity = defaultQuantity;
+            return;
+        }
+    })
 </script>
 
 
